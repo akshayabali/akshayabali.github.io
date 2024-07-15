@@ -27,10 +27,10 @@ function updateTable(rows) {
     table = d3
         .select("#table")
         // .attr("overflow", "auto")
-        .style("overflow", "auto")
+        // .style("overflow", "auto")
         .attr("display", "block")
         .style("width", table_width + "px")
-        .style("height", table_height + "px")
+        // .style("height", table_height + "px")
         .append("table")
         .style("border-collapse", "collapse")
         .style("border", "2px black solid");

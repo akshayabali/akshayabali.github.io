@@ -9,11 +9,6 @@ var tree_nodes = [
         "id_name": "Type B"
     },
     {
-        "name": "Type D",
-        "image": "type_d.png",
-        "id_name": "Type D"
-    },
-    {
         "name": "Type C",
         "image": "type_c.png",
         "id_name": "Type C"
@@ -42,52 +37,49 @@ var tree_nodes = [
 
 decisions = [
     {
-        "name": "Portable",
-        "one": "Type D",
-        "two": "Type C",
-        "level": 1,
-        "left_text": "Yes",
-        "right_text": "No"
-    },
-    {
-        "name": "Customized",
-        "one": "Type D_2",
+        "name": "Standalone",
+        "id": "Customized",
+        "one": "Type F",
         "two": "Type E",
         "level": 1,
         "left_text": "Yes",
         "right_text": "No"
     },
     {
-        "name": "Deployable",
+        "name": "Process",
+        "id": "Deployable",
         "one": "Customized",
-        "two": "Type F",
+        "two": "Type D_2",
         "level": 2,
-        "left_text": "Yes",
-        "right_text": "No"
+        "left_text": "Custom IC",
+        "right_text": "Commercial Electronics"
     },
     {
         "name": "Measurement",
-        "one": "Portable",
+        "id": "Measurement",
+        "one": "Type C",
         "two": "Type B",
-        "level": 2,
+        "level": 1,
         "left_text": "Optical",
         "right_text": "Electrical"
     },
     {
-        "name": "Microfluidic",
+        "name": "Fluid Control",
+        "id": "Microfluidic",
         "one": "Measurement",
         "two": "Type A",
-        "level": 3,
-        "left_text": "Yes",
-        "right_text": "No"
+        "level": 2,
+        "left_text": "Small volume of controlled fluids",
+        "right_text": "No controlled fluids"
     },
     {
-        "name": "Lab",
+        "name": "Motivation",
+        "id": "Motivation",
         "one": "Microfluidic",
         "two": "Deployable",
-        "level": 4,
-        "left_text": "Yes",
-        "right_text": "No"
+        "level": 3,
+        "left_text": "Development",
+        "right_text": "Deployment"
     }
 ]
 
@@ -98,8 +90,8 @@ rectWidth = canWidth / (tree_nodes_length + 3) < 170 ? 170 : canWidth / (tree_no
 rectHeight = canHeight / 11;
 rectRadius = 10;
 
-diamondWidth  = canHeight / 11;
-diamondHeight = canHeight / 11;  
+diamondWidth  = canHeight / 10;
+diamondHeight = diamondWidth; 
 
 application_width = canHeight / 7;  
 application_height = canHeight / 16;  
@@ -211,7 +203,7 @@ var tree_node = canvas
 
 
 
-    tree_node
+tree_node
     .append("rect")
     .attr("width", rectWidth)
     .attr("height", rectHeight)
@@ -220,7 +212,7 @@ var tree_node = canvas
     .attr("rx", rectRadius)
     .attr("stroke-width", 1.5);
 
-    tree_node
+tree_node
     .append("text")
     .attr("x", rectWidth / 2)
     .attr("y", rectHeight / 2)
@@ -232,7 +224,7 @@ var tree_node = canvas
         return d.name;
     });
 
-    tree_node
+tree_node
     .append("image")
     .attr("xlink:href", function (d) {
         return "images/"+d.image;
@@ -248,7 +240,7 @@ decision_diamond = canvas
     .enter()
     .append("g")
     .attr("id", function (d) {
-        return "d-" + d.name.toLowerCase();
+        return "d-" + d.id.toLowerCase();
     })
     .attr("transform", function (d) {
         // Get location of node type D and type C
@@ -260,7 +252,7 @@ decision_diamond = canvas
         if (d.one_id.includes("node")) {
             center_x += rectWidth / 2;
         }
-        var y = canHeight - ((d.level + 1 ) * (diamondHeight * 2) ) ;
+        var y = canHeight - ((d.level+1.5) * (diamondHeight*2) ) ;
         return "translate(" + (center_x) + ", " + (y) + ")";
     });
 
@@ -275,17 +267,27 @@ decision_diamond
     .attr("transform", "rotate(45)");
 
 decision_diamond
+    .append("g")
+    .attr("width", diamondWidth / 1.44)
+    .style("max-width", diamondWidth / 1.44)
+    .style("display", "block")
+    // .attr("overflow", "hidden")
+    .style("overflow", "hidden")
     .append("text")
+    .style("display", "block")
+    .style("max-width", diamondWidth / 1.44)
     .attr("y", diamondHeight / 1.4 + 3)
     .attr("text-anchor", "middle")
     .attr("font-size", font_size)
+    // .attr("overflow", "hidden")
+    .style("overflow", "hidden")
     .text(function (d) {
         return d.name;
     });
 
 var application = canvas.append("g")
     .attr("transform", function (d) {   
-        type_only = d3.select("#d-lab").attr("transform");
+        type_only = d3.select("#d-motivation").attr("transform");
         type_only_x = parseInt(type_only.split(",")[0].split("(")[1]);
         return "translate(" + (type_only_x - application_width/2) + ", " + 10 + ")";
     }
@@ -314,7 +316,7 @@ application
 for (let i = 0; i < decisions.length; i++) {
     one_id = decisions[i].one_id;
     two_id = decisions[i].two_id;
-    my_id = "d-"+ decisions[i].name.toLowerCase();
+    my_id = "d-"+ decisions[i].id.toLowerCase();
     one = d3.select("#" + one_id).attr("transform");
     two = d3.select("#" + two_id).attr("transform");
     me = d3.select("#" + my_id).attr("transform");
@@ -361,7 +363,8 @@ for (let i = 0; i < decisions.length; i++) {
     canvas
         .append("g")
         .append("text")
-        .attr("x", (me_x < one_x ? me_x + diamondWidth / 1.44 + (font_size * 2) : me_x - diamondWidth / 1.44 - (font_size * 2)))
+        // .attr("x", (me_x < one_x ? me_x + diamondWidth / 1.44 + (font_size * 7) : me_x - diamondWidth / 1.44 - (font_size * 7)))
+        .attr("x", one_x)
         .attr("y", (me_y + diamondHeight / 1.44) - font_size)
         .attr("text-anchor", "middle")
         .attr("dominant-baseline", "central")
@@ -371,7 +374,8 @@ for (let i = 0; i < decisions.length; i++) {
     canvas
         .append("g")
         .append("text")
-        .attr("x", (me_x < two_x ? me_x + diamondWidth / 1.44 + (font_size * 2) : me_x - diamondWidth / 1.44 - (font_size * 2)))
+        // .attr("x", (me_x < two_x ? me_x + diamondWidth / 1.44 + (font_size * 7) : me_x - diamondWidth / 1.44 - (font_size * 7)))
+        .attr("x", two_x)
         .attr("y", (me_y + diamondHeight / 1.44) - font_size)
         .attr("text-anchor", "middle")
         .attr("dominant-baseline", "central")
@@ -380,7 +384,7 @@ for (let i = 0; i < decisions.length; i++) {
 }
 
 // Add line between application and Lab
-lab = d3.select("#d-lab").attr("transform");
+lab = d3.select("#d-motivation").attr("transform");
 lab_x = parseInt(lab.split(",")[0].split("(")[1]);
 lab_y = parseInt(lab.split(",")[1].split(")")[0]);
 application_x = lab_x;
