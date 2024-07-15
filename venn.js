@@ -1892,7 +1892,7 @@ div.datum(sets).call(chart);
 
 var tooltip = d3.select("body").append("div")
     .attr("class", "venntooltip")
-    .attr("width", font_size)
+    .attr("height", font_size)
 
 div.selectAll("path")
     .style("stroke-opacity", 0)

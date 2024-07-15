@@ -1,86 +1,80 @@
 let data = [];
-let features = ["Cost Efficiency", "Integration Level", "Field Deployability", "Complexity", "Disposability"]
+let features = ["Integration Level", "Precision", "Cost Effectiveness", "Deployability", "Disposability"];
 
-// Name	Integration Level	Field Deployability	Cost	Disposability	Complexity
-// Type F	10	10	9	9	9
-// Type E	6	8	7	5	7
-// Type D	4	7	5	3	5
-// Type C	2	1	2	1	3
-// Type B	2	1	2	1	3
-// Type A	1	1	1	1	2
+// A to F 
+// Integration Level 1, 1, 1, 2, 3, 5
+// Precision 5, 4, 4, 3, 3, 3
+// Cost Effectiveness 1, 2, 2, 3, 4, 5
+// Deployability 1, 1, 1, 3, 4, 5
+// Disposability 1, 1, 1, 3, 4, 5
+
 
 var spider_data = [
     {
         "name" : "Type F",
         "group" : 6,
         "data" : {
-            "Cost Efficiency": 9,
-            "Integration Level": 10,
-            "Field Deployability": 10,
-            "Complexity": 9,
-            "Disposability": 9
+            "Integration Level": 5,
+            "Precision": 3,
+            "Cost Effectiveness": 5,
+            "Deployability": 5,
+            "Disposability": 5
         }
-
     },
     {
         "name" : "Type E",
         "group" : 5,
         "data" : {
-            "Cost Efficiency": 7,
-            "Integration Level": 8,
-            "Field Deployability": 8,
-            "Complexity": 7,
-            "Disposability": 6
+            "Integration Level": 3,
+            "Precision": 3,
+            "Cost Effectiveness": 4,
+            "Deployability": 4,
+            "Disposability": 4
         }
-
     },
     {
         "name" : "Type D",
         "group" : 4,
         "data" : {
-            "Cost Efficiency": 5,
-            "Integration Level": 7,
-            "Field Deployability": 7,
-            "Complexity": 5,
-            "Disposability": 4
+            "Integration Level": 3,
+            "Precision": 3,
+            "Cost Effectiveness": 3,
+            "Deployability": 3,
+            "Disposability": 3
         }
-
     },
     {
         "name" : "Type C",
         "group" : 3,
         "data" : {
-            "Cost Efficiency": 2,
-            "Integration Level": 1,
-            "Field Deployability": 1,
-            "Complexity": 3,
-            "Disposability": 2
+            "Integration Level": 2,
+            "Precision": 3,
+            "Cost Effectiveness": 2,
+            "Deployability": 1,
+            "Disposability": 1
         }
-
     },
     {
         "name" : "Type B",
         "group" : 2,
         "data" : {
-            "Cost Efficiency": 2,
             "Integration Level": 1,
-            "Field Deployability": 1,
-            "Complexity": 3,
-            "Disposability": 2
+            "Precision": 4,
+            "Cost Effectiveness": 2,
+            "Deployability": 1,
+            "Disposability": 1
         }
-
     },
     {
         "name" : "Type A",
         "group" : 1,
         "data" : {
-            "Cost Efficiency": 1,
             "Integration Level": 1,
-            "Field Deployability": 1,
-            "Complexity": 2,
+            "Precision": 5,
+            "Cost Effectiveness": 1,
+            "Deployability": 1,
             "Disposability": 1
         }
-
     }
 ];
 
@@ -92,10 +86,10 @@ var spiderSVG = d3.select("#spider").append("svg")
     .attr("height", canHeight);
 
 let radialScale = d3.scaleLinear()
-    .domain([0, 10])
+    .domain([0, 5])
     .range([0, 250]);
 
-let ticks = [2, 4, 6, 8, 10];
+let ticks = [1,2,3,4,5];
 
 spiderSVG.selectAll("circle")
     .data(ticks)
@@ -129,8 +123,8 @@ let featureData = features.map((f, i) => {
     return {
         "name": f,
         "angle": angle,
-        "line_coord": angleToCoordinate(angle, 10),
-        "label_coord": angleToCoordinate(angle, 10.5)
+        "line_coord": angleToCoordinate(angle, 5),
+        "label_coord": angleToCoordinate(angle, 5.5)
     };
 });
 
