@@ -19,7 +19,7 @@ function updateTable(rows) {
 
 
     table_height = window.innerHeight - 25;
-    table_width = window.innerWidth - 25;
+    table_width = window.screen.width;
 
     // Remove the existing table
     d3.select("#table").selectAll("*").remove();
@@ -29,7 +29,7 @@ function updateTable(rows) {
         // .attr("overflow", "auto")
         // .style("overflow", "auto")
         .attr("display", "block")
-        .style("width", table_width + "px")
+        .style("width", "99vw")
         // .style("height", table_height + "px")
         .append("table")
         .style("border-collapse", "collapse")
