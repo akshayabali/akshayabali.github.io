@@ -11,10 +11,10 @@ if (
 ) {
     scripts.forEach(
         function (script) {
-            var script = document.createElement("script");
-            script.src = script;
+            var script1 = document.createElement("script");
+            script1.src = script;
 
-            document.head.appendChild(script);
+            document.head.appendChild(script1);
         },
         function () {
             console.log("All scripts loaded");
