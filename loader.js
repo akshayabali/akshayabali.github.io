@@ -22,4 +22,8 @@ if (
     urlParams.get("check") === "programmingbiologypleaseloadmypage"
 ) {
     loadScript(0);
+} else {
+    var button = document.getElementById("download");
+    // Hide the download button
+    button.style.display = "none";
 }
