@@ -183,9 +183,7 @@ spiderSVG.selectAll("path")
             .attr("d", line)
             .attr("stroke-width", 3)
             .attr("stroke", (_, i) => {
-                var this_color = window.colorscale(i);
-                this_color = d3.color(this_color).darker(0.5);
-                return this_color;
+                return null;
             })
             .attr("my-stroke", (_, i) => {
                 var this_color = window.colorscale(i);
@@ -223,7 +221,7 @@ spiderSVG.selectAll("path")
             .on("mouseout", function(event, d){
                 tooltip.transition().duration(400).style("opacity", 0);
                 var this_color = d3.select(this).attr("my-stroke");
-                d3.select(this).attr("stroke", this_color);
+                d3.select(this).attr("stroke", null);
                 d3.select(this).attr("stroke-opacity", 0.5);
             })
     );
