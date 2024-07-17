@@ -694,8 +694,10 @@ graph_data = {
     // const width =  window.innerWidth > window.innerHeight ? 0.5 * window.innerWidth : window.innerWidth;
     // const height = 600;
 
-    const width = window.screen.width;
-    const height = window.screen.height * 0.5;
+    const width = 1500;
+    const height = 600;
+    // const width = window.screen.width;
+    // const height = window.screen.height * 0.5;
 
     // The force simulation mutates links and nodes, so create a copy
     // so that re-evaluating this cell produces the same result.
@@ -718,14 +720,15 @@ graph_data = {
 
     // var label_distance = circle_radius * 25;
     var label_distance = circle_radius * 20;
-    var left_padding = (width - (graph_labels.length * label_distance)) / 2;
+    // var left_padding = (width - (graph_labels.length * label_distance)) / 2;
+    var left_padding = 10;
 
     const label_box = d3.select("#graph_labels")
         .append("svg")
-        .attr("width", width)
-        .attr("height", circle_radius * 10)
-        .attr("viewBox", [0, 0, width, label_height * 2])
-        .attr("style", "max-width: 100%; height: auto; margin-top: 20px;");
+        .attr("width", window.innerWidth * 0.9)
+        .attr("height", window.innerHeight / 20)
+        .attr("viewBox", [0, 0, width, 50])
+        .attr("style", "max-width: 100%; height: auto; display:block; margin:auto;");
     
     const label = label_box.append("g")
         .selectAll()
@@ -734,13 +737,22 @@ graph_data = {
 
     label.append("circle")
         .attr("r", circle_radius)
-        .attr("cx", d => left_padding + d.id * label_distance)
+        .attr("cx", d => left_padding + (d.id - 1) * label_distance)
         .attr("cy", d => circle_radius)
         .attr("fill", d => colorscale(d.id))
         .text(d => d.group);
 
+
+    window.label_max = 0;
     label.append("text")
-        .attr("x", d => left_padding + 10 + d.id * label_distance)
+        .attr("x", d => {
+            var x = left_padding + (d.id - 1) * label_distance;
+            if (x > label_max) {
+                label_max = x;
+            }
+            // label_box.attr("width", label_max);
+            return left_padding + 10 + (d.id - 1) * label_distance
+        })
         .attr("y", d => circle_radius)
         .attr("dy", ".35em")
         .attr("text-anchor", "left")
@@ -771,8 +783,8 @@ graph_data = {
     // Create the SVG container.
     const svg = 
         d3.select("#graph").append("svg")
-        .attr("width", width)
-        .attr("height", height)
+        .attr("width", window.innerWidth)
+        .attr("height", window.innerHeight/2.5)
         .attr("viewBox", [0, 0, width, height])
         .attr("style", "max-width: 100%;");
 

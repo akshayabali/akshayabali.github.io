@@ -1,6 +1,6 @@
-canWidth  = window.screen.width  * 0.9;
-// canHeight = 650 + 110;
-canHeight = window.screen.height * 0.7;
+
+var canWidth  = 2800;
+var canHeight = 1050;
 
 var tree_nodes = [
     {
@@ -98,11 +98,11 @@ decisions = [
 
 var tree_nodes_length = tree_nodes.length;
 
-rectWidth = 250;
-rectHeight = 110;
+rectWidth = 340;
+rectHeight = 170;
 rectRadius = 10;
 
-diamondWidth  = 100;
+diamondWidth  = 150;
 diamondHeight = diamondWidth; 
 
 application_width = 200;  
@@ -110,10 +110,11 @@ application_height = 70;
 application_radius = 30;
 
 window.font_size = 18;
+window.tree_font_size = font_size * 1.5;
 
 window.tooltip = d3.select("body").append("div")
     .attr("class", "venntooltip")
-    .attr("height", font_size)
+    .attr("height", tree_font_size)
     // .attr("width", application_width)
     .on("mousemove", function(event, d) {
         var tooltip_x = event.pageX;
@@ -155,11 +156,18 @@ for (let i = 0; i < decisions.length; i++) {
 
 window.selected_tree = null;
 
+var viewBox_width = canWidth;
+var viewBox_height = canHeight;
+// var viewBox_width = canWidth > window.innerWidth  * 0.92 ? canWidth : window.innerWidth  * 0.92;
+// var viewBox_height = canHeight > window.innerHeight * 0.7 ? canHeight : window.innerHeight * 0.7;
+
 var canvas = d3
     .select("#tree")
     .append("svg")
-    .attr("width", canWidth)
-    .attr("height", canHeight)
+    .attr("width", window.innerWidth * 0.92)
+    .attr("height", window.innerHeight * 0.65)
+    // .attr("viewBox", "0 0 " + window.innerWidth * 0.92 + " " + window.innerHeight * 0.7)
+    .attr("viewBox", "0 0 " + viewBox_width + " " + viewBox_height)
     .append("g")
     
 
@@ -174,10 +182,9 @@ var tree_node = canvas
     .attr("class", "node")
     .attr("transform", function (d, i) {
         per_rect_padding = (canWidth - (rectWidth * tree_nodes.length)) / ( tree_nodes.length - 1);
-        return "translate(" + (i * (rectWidth + per_rect_padding)) + ", " + (canHeight - 2 * rectHeight) + ")";
+        return "translate(" + (i * (rectWidth + per_rect_padding)) + ", " + (canHeight - 1.2 * rectHeight) + ")";
     })
     .on("mouseover ", function (event, d) {
-        console.log("Mouseover");
 
         var id = d.name.split(" ")[1];
         for (let i = 0; i < graph_labels.length; i++) {
@@ -200,7 +207,6 @@ var tree_node = canvas
                .style("top",  (event.pageY - 28) + "px");
     })
     .on("mouseout", function (event, d) {
-        console.log("Mouseout");
         tooltip.style("opacity", 0);
         tooltip.style("width", 128 + "px")
         // tooltip.transition().duration(400).style("opacity", 0);
@@ -218,7 +224,6 @@ var tree_node = canvas
             d3.select(selected_tree).select("rect").attr("stroke-width", 1.5);
             if (selected_tree == this) {
                 selected_tree = null;
-                console.log("Unselected");
                 my_dataset = dataset;
                 updateTable(my_dataset);    
                 return;
@@ -233,10 +238,8 @@ var tree_node = canvas
             window.selectedVenn = null;
         }
         d3.select(this).select("rect").attr("stroke-width", 4);
-        // console.log(dataset);
         headers = dataset[0];
         my_dataset = dataset.filter(function (d) {
-            // console.log(d[24]);
             if (d[17].includes(id)) {
                 return true;
             }
@@ -264,7 +267,7 @@ tree_node
     .attr("text-anchor", "middle")
     .attr("dominant-baseline", "central")
     .attr("x", 4 * rectWidth / 5)
-    .attr("font-size", font_size)
+    .attr("font-size", tree_font_size)
     .text(function (d) {
         return d.name;
     });
@@ -289,15 +292,24 @@ decision_diamond = canvas
     })
     .attr("transform", function (d) {
         // Get location of node type D and type C
-        type_one = d3.select("#" + d.one_id).attr("transform");
-        type_two = d3.select("#" + d.two_id).attr("transform");
-        type_one_x = parseInt(type_one.split(",")[0].split("(")[1]);
-        type_two_x = parseInt(type_two.split(",")[0].split("(")[1]);
-        center_x = (parseInt(type_one_x) + parseInt(type_two_x)) / 2 ;
-        if (d.one_id.includes("node")) {
-            center_x += rectWidth / 2;
-        }
-        var y = canHeight - ((d.level+1.5) * (diamondHeight*2) ) ;
+        var type_one = d3.select("#" + d.one_id).attr("transform");
+        var type_one_width = d.one_id.includes("node") ? rectWidth : 0;
+        var type_two = d3.select("#" + d.two_id).attr("transform");
+        var type_two_width = d.two_id.includes("node") ? rectWidth : 0;
+        var type_one_x = parseInt(type_one.split(",")[0].split("(")[1]) + (parseInt(type_one_width) / 2);
+        var type_two_x = parseInt(type_two.split(",")[0].split("(")[1]) + (parseInt(type_two_width) / 2);
+        var center_x = ((parseInt(type_one_x) + parseInt(type_two_x)) / 2);
+        console.log({
+            "id": d.id,
+            "type_one": type_one,
+            "type_two": type_two,
+            "type_one_width": type_one_width,
+            "type_two_width": type_two_width,
+            "type_one_x": type_one_x,
+            "type_two_x": type_two_x,
+            "center_x": center_x,
+        })
+        var y = canHeight - ((d.level+1) * (diamondHeight*1.5) ) ;
         return "translate(" + (center_x) + ", " + (y) + ")";
     })
     .on("mouseover ", function (event, d) {
@@ -315,7 +327,6 @@ decision_diamond = canvas
                .style("top",  (event.pageY - 28) + "px");
     })
     .on("mouseout", function (event, d) {
-        console.log("Mouseout");
         tooltip.style("opacity", 0);
         tooltip.style("width", 128 + "px")
         d3.select(this).select("rect").attr("fill", "white");
@@ -343,7 +354,7 @@ decision_diamond
     .style("max-width", diamondWidth / 1.44)
     .attr("y", diamondHeight / 1.4 + 3)
     .attr("text-anchor", "middle")
-    .attr("font-size", font_size)
+    .attr("font-size", tree_font_size)
     // .attr("overflow", "hidden")
     .style("overflow", "hidden")
     .text(function (d) {
@@ -376,7 +387,7 @@ application
     .attr("y", application_height / 2)
     .attr("text-anchor", "middle")
     .attr("dominant-baseline", "central")
-    .attr("font-size", font_size)
+    .attr("font-size", tree_font_size)
     .text("Application");
 
 for (let i = 0; i < decisions.length; i++) {
@@ -429,23 +440,23 @@ for (let i = 0; i < decisions.length; i++) {
     canvas
         .append("g")
         .append("text")
-        // .attr("x", (me_x < one_x ? me_x + diamondWidth / 1.44 + (font_size * 7) : me_x - diamondWidth / 1.44 - (font_size * 7)))
+        // .attr("x", (me_x < one_x ? me_x + diamondWidth / 1.44 + (tree_font_size * 7) : me_x - diamondWidth / 1.44 - (tree_font_size * 7)))
         .attr("x", one_x)
-        .attr("y", (me_y + diamondHeight / 1.44) - font_size)
+        .attr("y", (me_y + diamondHeight / 1.44) - tree_font_size)
         .attr("text-anchor", "middle")
         .attr("dominant-baseline", "central")
-        .attr("font-size", font_size)
+        .attr("font-size", tree_font_size)
         .text(decisions[i].left_text);
 
     canvas
         .append("g")
         .append("text")
-        // .attr("x", (me_x < two_x ? me_x + diamondWidth / 1.44 + (font_size * 7) : me_x - diamondWidth / 1.44 - (font_size * 7)))
+        // .attr("x", (me_x < two_x ? me_x + diamondWidth / 1.44 + (tree_font_size * 7) : me_x - diamondWidth / 1.44 - (tree_font_size * 7)))
         .attr("x", two_x)
-        .attr("y", (me_y + diamondHeight / 1.44) - font_size)
+        .attr("y", (me_y + diamondHeight / 1.44) - tree_font_size)
         .attr("text-anchor", "middle")
         .attr("dominant-baseline", "central")
-        .attr("font-size", font_size)
+        .attr("font-size", tree_font_size)
         .text(decisions[i].right_text);
 }
 

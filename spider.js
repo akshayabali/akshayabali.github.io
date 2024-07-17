@@ -78,12 +78,14 @@ var spider_data = [
     }
 ];
 
-let canWidth = window.innerWidth;
-let canHeight = window.innerHeight / 2;
+var canWidth = 2800;
+var canHeight = 700;
 
 var spiderSVG = d3.select("#spider").append("svg")
-    .attr("width", canWidth)
-    .attr("height", canHeight);
+    .attr("width", window.innerWidth)
+    .attr("height", window.innerHeight / 2.5)
+    .attr("viewBox", [0, 0, canWidth, canHeight])
+
 
 let radialScale = d3.scaleLinear()
     .domain([0, 5])
@@ -91,7 +93,10 @@ let radialScale = d3.scaleLinear()
 
 let ticks = [1,2,3,4,5];
 
-spiderSVG.selectAll("circle")
+spiderSVG
+    .append("g")
+    .attr("class", "radial-ticks")
+    .selectAll("circle")
     .data(ticks)
     .join(
         enter => enter.append("circle")
@@ -102,7 +107,10 @@ spiderSVG.selectAll("circle")
             .attr("r", d => radialScale(d))
     );
 
-spiderSVG.selectAll(".ticklabel")
+spiderSVG
+    .append("g")
+    .attr("class", "radial-tick-labels")
+    .selectAll(".ticklabel")
     .data(ticks)
     .join(
         enter => enter.append("text")
@@ -129,7 +137,10 @@ let featureData = features.map((f, i) => {
 });
 
 // draw axis line
-spiderSVG.selectAll("line")
+spiderSVG
+    .append("g")
+    .attr("class", "axislines")
+    .selectAll("line")
     .data(featureData)
     .join(
         enter => enter.append("line")
@@ -141,13 +152,17 @@ spiderSVG.selectAll("line")
     );
 
 // draw axis label
-spiderSVG.selectAll(".axislabel")
+spiderSVG
+    .append("g")
+    .attr("class", "axislabels")
+    .selectAll(".axislabel")
     .data(featureData)
     .join(
         enter => enter.append("text")
             .attr("x", d => d.label_coord.x)
             .attr("y", d => d.label_coord.y)
             .text(d => d.name)
+            .attr("font-size", font_size * 1.5)
     );
 
 let line = d3.line()
@@ -169,7 +184,10 @@ function getPathCoordinates(d){
 }
 
 // draw the path element
-spiderSVG.selectAll("path")
+spiderSVG
+    .append("g")
+    .attr("class", "spider-path")
+    .selectAll("path")
     .data(spider_data)
     .join(
         enter => enter.append("path")

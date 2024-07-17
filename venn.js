@@ -1326,7 +1326,8 @@
 
             var svg = selection.select("svg")
                 .attr("width", width)
-                .attr("height", height);
+                .attr("height", height)
+                .attr("viewBox", "0 0 " + width + " " + height)
 
             // to properly transition intersection areas, we need the
             // previous circles locations. load from elements
@@ -1878,6 +1879,9 @@ var sets = [
     {"sets": [1, 2, 3],     "label_1": "El, uf, IC",        "label": "",    "size": 0},
     {"sets": [0, 1, 2, 3],  "label_1": "Bio, El, uf, IC",   "label": "",    "size": 0}
 ]
+
+var fix_width = 2800;
+var fix_height = 1000;
 
 canHeight = window.screen.height * 0.4;
 canWidth = window.screen.width * 0.4;
