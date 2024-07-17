@@ -21,6 +21,7 @@ if (
     urlParams.has("check") &&
     urlParams.get("check") === "programmingbiologypleaseloadmypage"
 ) {
+    document.getElementsByTagName("BODY")[0].style.display = "block";
     loadScript(0);
 } else {
     var button = document.getElementById("download");

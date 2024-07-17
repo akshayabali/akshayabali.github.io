@@ -78,8 +78,8 @@ var spider_data = [
     }
 ];
 
-let canWidth = window.screen.width;
-let canHeight = window.screen.height * 0.6;
+let canWidth = window.innerWidth;
+let canHeight = window.innerHeight / 2;
 
 var spiderSVG = d3.select("#spider").append("svg")
     .attr("width", canWidth)
@@ -186,7 +186,7 @@ spiderSVG.selectAll("path")
             })
             .attr("fill", (d, i) => {
                 console.log("fill", i, d, spider_data[i].group);
-                return window.colorscale(spider_data[i].group - 1);
+                return window.colorscale(spider_data[i].group);
             })
             .attr("stroke-opacity", 0.5)
             .attr("opacity", 0.4)

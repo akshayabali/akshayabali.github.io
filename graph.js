@@ -647,11 +647,6 @@ graph_data = {
     ],
     "labels": [
         {
-            "F": 0,
-            "group": "F",
-            "id": 0
-        },
-        {
             "A": 1,
             "group": "A",
             "id": 1
@@ -677,14 +672,19 @@ graph_data = {
             "id": 5
         },
         {
-            "C+D": 6,
-            "group": "C+D",
+            "F": 6,
+            "group": "F",
             "id": 6
         },
         {
-            "C+B": 7,
+            "C+D": 7,
+            "group": "C+D",
+            "id": 7,
+        },
+        {
+            "C+B": 8,
             "group": "C+B",
-            "id": 7
+            "id": 8
         }
     ]
 }

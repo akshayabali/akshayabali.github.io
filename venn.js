@@ -1890,10 +1890,6 @@ var chart = venn.VennDiagram()
 var div = d3.select("#venn")
 div.datum(sets).call(chart);
 
-var tooltip = d3.select("body").append("div")
-    .attr("class", "venntooltip")
-    .attr("height", font_size)
-
 div.selectAll("path")
     .style("stroke-opacity", 0)
     .style("stroke", "#000")
