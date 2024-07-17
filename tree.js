@@ -342,6 +342,25 @@ decision_diamond
     .attr("stroke-width", 1.5)
     .attr("transform", "rotate(45)")
 
+// decision_diamond
+//     .append("g")
+//     .attr("width", diamondWidth / 1.44)
+//     .style("max-width", diamondWidth / 1.44)
+//     .style("display", "block")
+//     // .attr("overflow", "hidden")
+//     .style("overflow", "hidden")
+//     .append("text")
+//     .style("display", "block")
+//     .style("max-width", diamondWidth / 1.44)
+//     .attr("y", diamondHeight / 1.4 + 3)
+//     .attr("text-anchor", "middle")
+//     .attr("font-size", tree_font_size)
+//     // .attr("overflow", "hidden")
+//     .style("overflow", "hidden")
+//     .text(function (d) {
+//         return d.name;
+//     });
+
 decision_diamond
     .append("g")
     .attr("width", diamondWidth / 1.44)
@@ -349,7 +368,7 @@ decision_diamond
     .style("display", "block")
     // .attr("overflow", "hidden")
     .style("overflow", "hidden")
-    .append("text")
+    .append("p")
     .style("display", "block")
     .style("max-width", diamondWidth / 1.44)
     .attr("y", diamondHeight / 1.4 + 3)
