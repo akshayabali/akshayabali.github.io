@@ -1863,28 +1863,28 @@
 })));
 
 var sets = [
-    {"sets": [0],           "label_1": "Bio",               "label": "Bio", "size": 55},
-    {"sets": [1],           "label_1": "El",                "label": "El",  "size": 5},
-    {"sets": [2],           "label_1": "uf",                "label": "uf",  "size": 38},
-    {"sets": [3],           "label_1": "IC",                "label": "IC",  "size": 35},
-    {"sets": [0, 1],        "label_1": "Bio, El",           "label": "",    "size": 3},
-    {"sets": [0, 2],        "label_1": "Bio, uf",           "label": "",    "size": 19},
-    {"sets": [0, 3],        "label_1": "Bio, IC",           "label": "",    "size": 21},
-    {"sets": [1, 2],        "label_1": "El, uf",            "label": "",    "size": 0},
-    {"sets": [1, 3],        "label_1": "El, IC",            "label": "",    "size": 0},
-    {"sets": [2, 3],        "label_1": "uf, IC",            "label": "",    "size": 6},
-    {"sets": [0, 1, 2],     "label_1": "Bio, El, uf",       "label": "",    "size": 1},
-    {"sets": [0, 1, 3],     "label_1": "Bio, El, IC",       "label": "",    "size": 0},
-    {"sets": [0, 2, 3],     "label_1": "Bio, uf, IC",       "label": "",    "size": 7},
-    {"sets": [1, 2, 3],     "label_1": "El, uf, IC",        "label": "",    "size": 0},
-    {"sets": [0, 1, 2, 3],  "label_1": "Bio, El, uf, IC",   "label": "",    "size": 0}
+    {"sets": [0],           "label": "Bio", "size": 55, "label_1": "Bio: Synthetic biology",},
+    {"sets": [1],           "label": "El",  "size": 5,  "label_1": "El: Benchtop electronics or portable commercial electronics",},
+    {"sets": [2],           "label": "uF",  "size": 38, "label_1": "uF: Controlled liquid flow via microfluidics",},
+    {"sets": [3],           "label": "IC",  "size": 35, "label_1": "IC: Custom integrated circuits",},
+    {"sets": [0, 1],        "label": "",    "size": 3 , "label_1": "Bio, El",},
+    {"sets": [0, 2],        "label": "",    "size": 19, "label_1": "Bio, uf",},
+    {"sets": [0, 3],        "label": "",    "size": 21, "label_1": "Bio, IC",},
+    {"sets": [1, 2],        "label": "",    "size": 0 , "label_1": "El, uf",},
+    {"sets": [1, 3],        "label": "",    "size": 0 , "label_1": "El, IC",},
+    {"sets": [2, 3],        "label": "",    "size": 6 , "label_1": "uf, IC",},
+    {"sets": [0, 1, 2],     "label": "",    "size": 1 , "label_1": "Bio, El, uf",},
+    {"sets": [0, 1, 3],     "label": "",    "size": 0 , "label_1": "Bio, El, IC",},
+    {"sets": [0, 2, 3],     "label": "",    "size": 7 , "label_1": "Bio, uf, IC",},
+    {"sets": [1, 2, 3],     "label": "",    "size": 0 , "label_1": "El, uf, IC",},
+    {"sets": [0, 1, 2, 3],  "label": "",    "size": 0 , "label_1": "Bio, El, uf, IC",}
 ]
 
 var fix_width = 2800;
 var fix_height = 1000;
 
-canHeight = window.screen.height * 0.4;
-canWidth = window.screen.width * 0.4;
+canHeight = window.innerHeight * 0.4;
+canWidth = window.innerWidth / 3;
 
 var chart = venn.VennDiagram()
                 .width(canWidth)
@@ -1904,11 +1904,14 @@ window.selectedVenn = null;
 
 div.selectAll("g")
     .on("mouseover", function(event, d) {
+        console.log("Mouseover");
         // sort all the areas relative to the current item
         venn.sortAreas(div, d);
+        tooltip.attr("mouseinside", "true");
 
         // Display a tooltip with the current size
-        tooltip.transition().duration(400).style("opacity", .9);
+        tooltip.style("opacity", .9);
+        // tooltip.transition().duration(400).style("opacity", .9);
         // tooltip.text(d.size + " users");
         tooltip.text(d.size + " " + d.label_1);
 
@@ -1920,12 +1923,16 @@ div.selectAll("g")
     })
 
     .on("mousemove", function(event, d) {
-        tooltip.style("left", (event.pageX) + "px")
+        tooltip.style("left", (event.pageX + 10) + "px")
                .style("top",  (event.pageY - 28) + "px");
     })
 
     .on("mouseout", function(event, d) {
-        tooltip.transition().duration(400).style("opacity", 0);
+        console.log("Mouseout");
+        tooltip.attr("mouseinside", "false");
+        tooltip.style("opacity", 0);
+        
+        // tooltip.transition().duration(400).style("opacity", 0);
         if (window.selectedVenn == null) {
             var selection = d3.select(this).transition("tooltip").duration(400);
             selection.select("path")

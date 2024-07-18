@@ -694,7 +694,7 @@ graph_data = {
     // const width =  window.innerWidth > window.innerHeight ? 0.5 * window.innerWidth : window.innerWidth;
     // const height = 600;
 
-    const width = 1500;
+    const width = 750;
     const height = 600;
     // const width = window.screen.width;
     // const height = window.screen.height * 0.5;
@@ -783,8 +783,8 @@ graph_data = {
     // Create the SVG container.
     const svg = 
         d3.select("#graph").append("svg")
-        .attr("width", window.innerWidth)
-        .attr("height", window.innerHeight/2.5)
+        .attr("width", window.innerWidth/3)
+        .attr("height", window.innerHeight * 0.4)
         .attr("viewBox", [0, 0, width, height])
         .attr("style", "max-width: 100%;");
 

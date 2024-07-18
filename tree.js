@@ -117,9 +117,8 @@ window.tooltip = d3.select("body").append("div")
     .attr("height", tree_font_size)
     // .attr("width", application_width)
     .on("mousemove", function(event, d) {
-        var tooltip_x = event.pageX;
 
-        tooltip_x = event.pageX + 500 > window.screen.width ? event.pageX - 510 : event.pageX + 10;
+        var tooltip_x = event.pageX + 500 > window.screen.width ? event.pageX - 510 : event.pageX + 10;
 
         tooltip.style("left", tooltip_x + "px")
                .style("top",  (event.pageY - 28) + "px");
@@ -164,7 +163,7 @@ var viewBox_height = canHeight;
 var canvas = d3
     .select("#tree")
     .append("svg")
-    .attr("width", window.innerWidth * 0.92)
+    .attr("width", window.innerWidth * 0.98)
     .attr("height", window.innerHeight * 0.65)
     // .attr("viewBox", "0 0 " + window.innerWidth * 0.92 + " " + window.innerHeight * 0.7)
     .attr("viewBox", "0 0 " + viewBox_width + " " + viewBox_height)
@@ -299,16 +298,6 @@ decision_diamond = canvas
         var type_one_x = parseInt(type_one.split(",")[0].split("(")[1]) + (parseInt(type_one_width) / 2);
         var type_two_x = parseInt(type_two.split(",")[0].split("(")[1]) + (parseInt(type_two_width) / 2);
         var center_x = ((parseInt(type_one_x) + parseInt(type_two_x)) / 2);
-        console.log({
-            "id": d.id,
-            "type_one": type_one,
-            "type_two": type_two,
-            "type_one_width": type_one_width,
-            "type_two_width": type_two_width,
-            "type_one_x": type_one_x,
-            "type_two_x": type_two_x,
-            "center_x": center_x,
-        })
         var y = canHeight - ((d.level+1) * (diamondHeight*1.5) ) ;
         return "translate(" + (center_x) + ", " + (y) + ")";
     })
