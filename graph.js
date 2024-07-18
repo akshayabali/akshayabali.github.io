@@ -783,7 +783,7 @@ graph_data = {
     // Create the SVG container.
     const svg = 
         d3.select("#graph").append("svg")
-        .attr("width", window.innerWidth/3)
+        .attr("width", window.innerWidth/3  )
         .attr("height", window.innerHeight * 0.4)
         .attr("viewBox", [0, 0, width, height])
         .attr("style", "max-width: 100%;");
@@ -859,12 +859,16 @@ graph_data = {
             d3.select(selected_node).attr("stroke", "#fff");   
         }
         if (selected_doi != null) {
+            console.log("printing selected_doi", selected_doi);
             var doi = selected_doi.replaceAll("/", "-")
             doi = doi.replaceAll(".", "-")
             var tr_id = "#td-" + doi;
             d3.select(tr_id).attr("style", "background-color: white");
+            //TODO:Fix this
         }
+
         selected_doi = event.subject.id;
+        console.log("printing selected_doi_2", selected_doi);
         // change the color of only the selected node
         d3.select(this).attr("fill", "red");
         d3.select(this).attr("stroke", "red");
