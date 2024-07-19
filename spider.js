@@ -1,5 +1,6 @@
 let data = [];
-let features = ["Integration Level", "Precision", "Cost Effectiveness", "Deployability", "Disposability"];
+// let features = ["Integration Level", "Precision", "Cost Effectiveness", "Deployability", "Disposability"];
+let features = ["Integration Level", "Cost Effectiveness", "Precision", "Disposability", "Deployability",];
 
 // 1.	Integration Level: The level of integration improves as more functions are combined into a single device.
 // 2.	Deployability: Field deployability improves when systems are self-contained and use wireless communications.
@@ -30,67 +31,67 @@ var spider_data = [
         "group" : 6,
         "data" : {
             "Integration Level": 5,
-            "Precision": 3,
-            "Cost Effectiveness": 5,
             "Deployability": 5,
-            "Disposability": 5
-        }
+            "Disposability": 5,
+            "Precision": 3,
+            "Cost Effectiveness": 5,            
+        },
     },
     {
         "name" : "Type E",
         "group" : 5,
         "data" : {
             "Integration Level": 3,
-            "Precision": 3,
-            "Cost Effectiveness": 4,
             "Deployability": 4,
-            "Disposability": 4
-        }
+            "Disposability": 4,
+            "Precision": 3,
+            "Cost Effectiveness": 4,            
+        },
     },
     {
         "name" : "Type D",
         "group" : 4,
         "data" : {
             "Integration Level": 3,
-            "Precision": 3,
-            "Cost Effectiveness": 3,
             "Deployability": 3,
-            "Disposability": 3
-        }
+            "Disposability": 3,
+            "Precision": 3,
+            "Cost Effectiveness": 3,            
+        },
     },
     {
         "name" : "Type C",
         "group" : 3,
         "data" : {
-            "Integration Level": 2,
-            "Precision": 3,
-            "Cost Effectiveness": 2,
+            "Integration Level": 1,
             "Deployability": 1,
-            "Disposability": 1
-        }
+            "Disposability": 1,
+            "Precision": 3,
+            "Cost Effectiveness": 2,            
+        },
     },
     {
         "name" : "Type B",
         "group" : 2,
         "data" : {
             "Integration Level": 1,
-            "Precision": 4,
-            "Cost Effectiveness": 2,
             "Deployability": 1,
-            "Disposability": 1
-        }
+            "Disposability": 1,
+            "Precision": 4,
+            "Cost Effectiveness": 2,            
+        },
     },
     {
         "name" : "Type A",
         "group" : 1,
         "data" : {
             "Integration Level": 1,
-            "Precision": 5,
-            "Cost Effectiveness": 1,
             "Deployability": 1,
-            "Disposability": 1
-        }
-    }
+            "Disposability": 1,
+            "Precision": 5,
+            "Cost Effectiveness": 1,            
+        },
+    },
 ];
 
 var canWidth = 500;
@@ -110,19 +111,20 @@ let radialScale = d3.scaleLinear()
 
 let ticks = [1,2,3,4,5];
 
-spiderSVG
-    .append("g")
-    .attr("class", "radial-ticks")
-    .selectAll("circle")
-    .data(ticks)
-    .join(
-        enter => enter.append("circle")
-            .attr("cx", canWidth / 2)
-            .attr("cy", canHeight / 2)
-            .attr("fill", "none")
-            .attr("stroke", "gray")
-            .attr("r", d => radialScale(d))
-    );
+function angleToCoordinate(angle, value){
+    angle = angle - Math.PI / 4;
+    let x = Math.cos(angle) * radialScale(value);
+    let y = Math.sin(angle) * radialScale(value);
+    return {"x": canWidth / 2 + x, "y": canHeight / 2 - y};
+}
+
+function rotateCoordinates(x, y, angle){
+    // Rotate the coordinates based on the center as pivot
+    var center = getCenterCoordinates();
+    var new_x = center.x + (x - center.x) * Math.cos(angle) - (y - center.y) * Math.sin(angle);
+    var new_y = center.y + (x - center.x) * Math.sin(angle) + (y - center.y) * Math.cos(angle);
+    return {"x": new_x, "y": new_y};
+}
 
 spiderSVG
     .append("g")
@@ -130,14 +132,44 @@ spiderSVG
     .selectAll(".ticklabel")
     .data(ticks)
     .join(
-        enter => enter.append("text")
-            .attr("class", "ticklabel")
-            .attr("x", canWidth / 2 + 5)
-            .attr("y", d => canHeight / 2 - radialScale(d))
-            .text(d => d.toString())
+        enter => {
+
+            enter.append("circle")
+            .attr("cx", canWidth / 2)
+            .attr("cy", canHeight / 2)
+            .attr("fill", "none")
+            .attr("stroke", "gray")
+            .attr("r", d => radialScale(d));
+
+            // var rotate_angle = - Math.PI / 1.6;  // 45 degrees
+
+            // enter.append("text")
+            // .attr("class", "ticklabel")
+            // .attr("x", d => {
+            //     var x = canWidth / 2 + 5;
+            //     var y = canHeight / 2 - radialScale(d);
+            //     var new_coords = rotateCoordinates(x, y, rotate_angle);
+            //     return new_coords.x;
+            // })
+            // .attr("y", d => {
+            //     var x = canWidth / 2 + 5;
+            //     var y = canHeight / 2 - radialScale(d);
+            //     var new_coords = rotateCoordinates(x, y, rotate_angle);
+            //     return new_coords.y;
+            // })
+            // .text(d => {
+            //     if (d == ticks[ticks.length - 1]){
+            //         return "High";
+            //     } else if (d == ticks[0]){
+            //         return "Low";
+            //     }
+            //     return "";
+            // })
+        }
     );
 
 function angleToCoordinate(angle, value){
+    angle = angle - Math.PI / 4;
     let x = Math.cos(angle) * radialScale(value);
     let y = Math.sin(angle) * radialScale(value);
     return {"x": canWidth / 2 + x, "y": canHeight / 2 - y};
@@ -272,25 +304,6 @@ spiderSVG
 
     );
 
-
-// draw axis label
-// spiderSVG
-//     .append("g")
-//     .attr("class", "axisreacts")
-//     .selectAll(".axislabel")
-//     .data(featureData)
-//     .join(
-//         enter => {
-//             return enter.append("text")
-//                 .attr("x", d => d.label_coord.x)
-//                 .attr("y", d => d.label_coord.y)
-//                 .text(d => d.name)
-//                 .attr("font-size", font_size * spider_font_scaling)
-//                 .attr("fill", "#58595B")
-//                 .attr("font-weight", "bold") 
-//             }
-//     );
-
 let line = d3.line()
     .x(d => d.x)
     .y(d => d.y);
@@ -395,4 +408,49 @@ spiderSVG
                 var this_color = d3.select(this).attr("my-stroke");
                 d3.select(this).attr("stroke", this_color);
             })
+    );
+
+    spiderSVG
+    .append("g")
+    .attr("class", "radial-tick-labels")
+    .selectAll(".ticklabel")
+    .data(ticks)
+    .join(
+        enter => {
+
+            // enter.append("circle")
+            // .attr("cx", canWidth / 2)
+            // .attr("cy", canHeight / 2)
+            // .attr("fill", "none")
+            // .attr("stroke", "gray")
+            // .attr("r", d => radialScale(d));
+
+            var rotate_angle = - Math.PI / 1.6;  // 45 degrees
+
+            enter.append("text")
+            .attr("class", "ticklabel")
+            .attr("x", d => {
+                var x = canWidth / 2 + 5;
+                var y = canHeight / 2 - radialScale(d);
+                var new_coords = rotateCoordinates(x, y, rotate_angle);
+                return new_coords.x;
+            })
+            .attr("y", d => {
+                var x = canWidth / 2 + 5;
+                var y = canHeight / 2 - radialScale(d);
+                var new_coords = rotateCoordinates(x, y, rotate_angle);
+                return new_coords.y;
+            })
+            .text(d => {
+                if (d == ticks[ticks.length - 1]){
+                    return "High";
+                } else if (d == ticks[0]){
+                    return "Low";
+                }
+                return "";
+            })
+            .style("font-size", "24px")
+            .style("font-weight", "bold")
+            .style("fill", "#484848")    
+        }
     );
