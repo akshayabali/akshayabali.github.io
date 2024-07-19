@@ -689,10 +689,7 @@ graph_data = {
     ]
 }
 
-// data = d3.json("./data.json").then(function(graph_data) {
     // Specify the dimensions of the chart.
-    // const width =  window.innerWidth > window.innerHeight ? 0.5 * window.innerWidth : window.innerWidth;
-    // const height = 600;
 
     const width = 750;
     const height = 600;
@@ -710,9 +707,6 @@ graph_data = {
 
     var node_list = d3.selectAll(".node rect");
 
-    // Sort node_list by id
-    // node_list.sort((a, b) => a.group - b.group);
-
     console.log("data", d3.selectAll(".node rect"))
     console.log("Node list", node_list)
 
@@ -721,9 +715,7 @@ graph_data = {
         return colorscale(d.group);
     })
 
-    // var label_distance = circle_radius * 25;
     var label_distance = circle_radius * 20;
-    // var left_padding = (width - (graph_labels.length * label_distance)) / 2;
     var left_padding = 10;
 
     const label_box = d3.select("#graph_labels")
@@ -766,10 +758,6 @@ graph_data = {
     var link_strength = 1;
     var charge_strength = -font_size;
     var charge_distance = font_size * 15;
-    // var link_distance = 50;
-    // var link_strength = 1;
-    // var charge_strength = -10;
-    // var charge_distance = 200;
 
     // Create a simulation with several forces.
     const simulation = d3.forceSimulation(graph_nodes)
@@ -914,15 +902,5 @@ graph_data = {
         event.subject.fx = null;
         event.subject.fy = null;
         d3.select(this).attr("fill", d => colorscale(d.group));
-        // d3.select(this).attr("stroke", "#fff");
     }
 
-    // When this cell is re-run, stop the previous simulation. (This doesn’t
-    // really matter since the target alpha is zero and the simulation will
-    // stop naturally, but it’s a good practice.)
-    // invalidation.then(() => simulation.stop());
-
-    // return svg.node();
-
-// }
-// );
