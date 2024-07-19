@@ -51,7 +51,7 @@ decisions = [
         "level": 1,
         "left_text": "Yes",
         "right_text": "No",
-        "description": "Stand-alone systems are classified as such when they fully integrate custom-designed wireless electronics within miniaturized microfluidic enclosures, thus eliminating the need for external wiring during field deployment.",
+        "description": "Stand-alone systems are classified as such when they fully integrate custom-designed wireless electronics within miniaturized microfluidic enclosures, thus eliminating the need for external wiring during field deployment. Stand-alone systems require minimal physical interaction, may be single-use, and are likely deployed in remote, inaccessible areas.",
     },
     {
         "name": "Process",
@@ -61,7 +61,7 @@ decisions = [
         "level": 2,
         "left_text": "Custom IC",
         "right_text": "Commercial Electronics",
-        "description": "Portable systems use either off-the-shelf commercial electronics or custom-designed integrated circuits (ICs) tailored to specific application needs.",
+        "description": "Portable systems use either off-the-shelf commercial electronics or custom-designed integrated circuits (ICs) tailored to specific application needs. The selection of these options depends on the availability of components, packaging needs, cost, and the expertise of the development group related to custom electronics design, development, fabrication, and test.",
     },
     {
         "name": "Measurement",
@@ -71,7 +71,7 @@ decisions = [
         "level": 1,
         "left_text": "Optical",
         "right_text": "Electrical",
-        "description": "Engineered biological systems use electrical or optical readout mechanisms for laboratory performance characterization.",
+        "description": "Engineered biological systems use electrical or optical readout mechanisms for laboratory performance characterization. The selection of these options will depend on the biological mechanism that is available and the user’s need for its precision, accuracy, and speed.",
     },
     {
         "name": "Fluid Control",
@@ -81,7 +81,7 @@ decisions = [
         "level": 2,
         "left_text": "Small volume of controlled fluids",
         "right_text": "No controlled fluids",
-        "description": "Engineered biological systems can operate in well plates or specialized micro-environments controlling small liquid volumes via microfluidics.",
+        "description": "Engineered biological systems can operate in static, single sampled labware or specialized micro-environments controlling small liquid volumes via microfluidics. The application needs, budget, and system constraints will determine which path will be chosen.",
     },
     {
         "name": "Motivation",
@@ -91,7 +91,7 @@ decisions = [
         "level": 3,
         "left_text": "Development",
         "right_text": "Deployment",
-        "description": "Engineered biological systems follow two pathways: controlled laboratory development with benchtop equipment or cost-effective, miniaturized deployment with wireless electronics and microfluidics.",
+        "description": "Engineered biological systems  follow two pathways: controlled laboratory development with benchtop equipment or cost-effective, miniaturized deployment with wireless electronics and microfluidics. The former path is selected for exploratory research where elements of the system (electronic, biological, or microfluidic) must be developed, refined, and tested. The latter path is for more mature platforms where early-stage prototyping processes have been completed.",
     }
 ]
 
