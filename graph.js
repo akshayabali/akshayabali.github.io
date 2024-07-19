@@ -1,5 +1,5 @@
 // Specify the color scale.
-window.colorscale = d3.scaleOrdinal(d3.schemePaired);
+
 
 window.selected_doi = ""
 window.selected_node = null
@@ -708,14 +708,17 @@ graph_data = {
     var label_height = font_size * 2;
     var circle_radius = font_size / 2;
 
+    var node_list = d3.selectAll(".node rect");
+
+    // Sort node_list by id
+    // node_list.sort((a, b) => a.group - b.group);
+
+    console.log("data", d3.selectAll(".node rect"))
+    console.log("Node list", node_list)
+
     d3.selectAll(".node rect")
     .attr("fill", function (d) {
-        var id = d.name.split(" ")[1];
-        for (let i = 0; i < graph_labels.length; i++) {
-            if (graph_labels[i].group == id) {
-                return colorscale(graph_labels[i].id) + "b9";
-            }
-        }
+        return colorscale(d.group);
     })
 
     // var label_distance = circle_radius * 25;

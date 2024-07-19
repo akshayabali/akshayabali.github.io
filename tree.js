@@ -2,43 +2,56 @@
 var canWidth  = 2800;
 var canHeight = 1050;
 
+window.colorscale = d3.scaleOrdinal(d3.schemePaired);
+
 var tree_nodes = [
     {
         "name": "Type A",
         "image": "type_a.png",
         "id_name": "Type A",
         "description": "BIPOLOs are pure engineered biological systems designed for laboratory use and evaluated with precise benchtop instruments, such as plate readers for analyzing optical properties, without the need for microfluidics or electronic components.",
+        "group": 0,
+        "position": 0,
     },
     {
         "name": "Type B",
         "image": "type_b.png",
         "id_name": "Type B",
         "description": "BIHELOs are hybrid engineered biological systems that utilize microfluidics and are evaluated with precise electrical benchtop instruments, such as potentiostats and LCR meters, to analyze cellular properties and electrochemical reactions.",
+        "group": 1,
+        "position": 1,
     },
     {
         "name": "Type C",
         "image": "type_c.png",
         "id_name": "Type C",
         "description": "BIHOLOs are hybrid engineered biological systems analyzed using optical techniques within microfluidic setups and evaluated with benchtop instruments, such as flow cytometers, fluorescence detectors, and photon counters.",
+        "group": 2,
+        "position": 2,
     },
     {
         "name": "Type E",
         "image": "type_e.png",
         "id_name": "Type E",
         "description": "BIHEMCs are hybrid engineered biological systems with independently designed custom CMOS electronics and microfluidics, which are portable but not yet ready for stand-alone field deployment.",
-
+        "group": 4,
+        "position": 3,
     },
     {
         "name": "Type F",
         "image": "type_f.png",
         "id_name": "Type F",
         "description": "BSIHEMCs or CSBS are stand-alone, fully integrated field-deployable systems that use custom-designed CMOS electronics embedded within microfluidic housings, integrating all necessary components to ensure reliable data generation, wireless communication, and optimal integration between electronic and biological elements without needing any external components.",
+        "group": 5,
+        "position": 4,
     },
     {
         "name": "Type D",
         "image": "type_d.png",
         "id_name": "Type D",
         "description": "BIHEMOs are hybrid engineered biological systems equipped with portable commercial electronics for data generation, processing, and wireless communication, eliminating the need for highly precise benchtop equipment and thus facilitating deployment.",
+        "group": 3,
+        "position": 5,
     },
 ];
 
@@ -135,10 +148,10 @@ for (let i = 0; i < decisions.length; i++) {
 
     for (let j = 0; j < tree_nodes.length; j++) {
         if (tree_nodes[j].id_name == one_text) {
-            one_id = "node-" + j;
+            one_id = "node-" + tree_nodes[j].group;
         }
         if (tree_nodes[j].id_name == two_text) {
-            two_id = "node-" + j;
+            two_id = "node-" + tree_nodes[j].group;
         }
     }
 
@@ -170,18 +183,23 @@ var canvas = d3
     .append("g")
     
 
+var tree_nodes_sorted = tree_nodes.sort(function (a, b) {
+    return a.group - b.group;
+});
+
 var tree_node = canvas
     .selectAll(".node")
-    .data(tree_nodes)
+    .data(tree_nodes_sorted)
     .enter()
     .append("g")
     .attr("id", function (d, i) {
-        return "node-" + i;
+        console.log(d, i)
+        return "node-" + (d.group);
     })
     .attr("class", "node")
     .attr("transform", function (d, i) {
         per_rect_padding = (canWidth - (rectWidth * tree_nodes.length)) / ( tree_nodes.length - 1);
-        return "translate(" + (i * (rectWidth + per_rect_padding)) + ", " + (canHeight - 1.2 * rectHeight) + ")";
+        return "translate(" + (d.position * (rectWidth + per_rect_padding)) + ", " + (canHeight - 1.2 * rectHeight) + ")";
     })
     .on("mouseover ", function (event, d) {
 
