@@ -28,6 +28,7 @@ var feature_description = {
 var spider_data = [
     {
         "name" : "Type F",
+        "label" : "f",
         "group" : 6,
         "data" : {
             "Integration Level": 5,
@@ -39,6 +40,7 @@ var spider_data = [
     },
     {
         "name" : "Type E",
+        "label" : "e",
         "group" : 5,
         "data" : {
             "Integration Level": 3,
@@ -50,6 +52,7 @@ var spider_data = [
     },
     {
         "name" : "Type D",
+        "label" : "d",
         "group" : 4,
         "data" : {
             "Integration Level": 3,
@@ -59,19 +62,20 @@ var spider_data = [
             "Cost Effectiveness": 3,            
         },
     },
+    // {
+    //     "name" : "Type C",
+    //     "group" : 3,
+    //     "data" : {
+    //         "Integration Level": 1,
+    //         "Deployability": 1,
+    //         "Disposability": 1,
+    //         "Precision": 3,
+    //         "Cost Effectiveness": 2,            
+    //     },
+    // },
     {
-        "name" : "Type C",
-        "group" : 3,
-        "data" : {
-            "Integration Level": 1,
-            "Deployability": 1,
-            "Disposability": 1,
-            "Precision": 3,
-            "Cost Effectiveness": 2,            
-        },
-    },
-    {
-        "name" : "Type B",
+        "name" : "Type B, C",
+        "label" : "b, c",
         "group" : 2,
         "data" : {
             "Integration Level": 1,
@@ -83,6 +87,7 @@ var spider_data = [
     },
     {
         "name" : "Type A",
+        "label" : "a",
         "group" : 1,
         "data" : {
             "Integration Level": 1,
@@ -321,39 +326,6 @@ function getPathCoordinates(d){
     return coordinates;
 }
 
-// draw a circle for each data point
-spiderSVG
-    .append("g")
-    .attr("class", "spider-points")
-    .selectAll("circle")
-    .data(spider_data)
-    .join(
-        enter => enter.append("g")
-            .attr("class", "spider-point")
-            .selectAll("circle")
-            .data(d => {
-                var coordinates = getPathCoordinates(d);
-                var out_array = [];
-                for (var i = 0; i < coordinates.length; i++){
-                    out_array.push({
-                        "data" : d,
-                        "coordinates" : coordinates[i]
-                    });
-                }
-                return out_array;
-            })
-            .join(
-                enter => enter.append("circle")
-                    .attr("cx", d => d.coordinates.x)
-                    .attr("cy", d => d.coordinates.y)
-                    .attr("r", 7)
-                    .attr("fill", (d, i) => {
-                        return window.colorscale(d.data.group);
-                    })
-                    .attr("opacity", 0.5)
-            )
-    );
-
 // draw the path element
 spiderSVG
     .append("g")
@@ -374,7 +346,8 @@ spiderSVG
                 return d3.color(stroke_color).darker(0.9);
             })
             .attr("fill", (d, i) => {
-                return window.colorscale(spider_data[i].group);
+                // brighter color
+                return d3.color(window.colorscale(spider_data[i].group)).brighter(0.9);
             })
             .attr("stroke-opacity", 1)
             .attr("opacity", 0.4)
@@ -409,6 +382,63 @@ spiderSVG
                 d3.select(this).attr("stroke", this_color);
             })
     );
+
+// draw a circle for each data point
+spiderSVG
+    .append("g")
+    .attr("class", "spider-points")
+    .selectAll("circle")
+    .data(spider_data)
+    .join(
+        enter => {
+            enter.append("g")
+            .attr("class", "spider-point")
+            .selectAll("circle")
+            .data(d => {
+                var coordinates = getPathCoordinates(d);
+                var out_array = [];
+                for (var i = 0; i < coordinates.length; i++){
+                    out_array.push({
+                        "data" : d,
+                        "coordinates" : coordinates[i]
+                    });
+                }
+                return out_array;
+            })
+            .join(
+                enter => {
+                    enter.append("circle")
+                    .attr("cx", d => d.coordinates.x)
+                    .attr("cy", d => d.coordinates.y)
+                    .attr("r", 7)
+                    .attr("fill", (d, i) => {
+                        return window.colorscale(d.data.group);
+                    })
+                    .attr("opacity", 0.5)
+
+                    console.log("enter", enter);
+                    // enter.append("text")
+                    // .attr("x", d => d.coordinates.x)
+                    // .attr("y", d => d.coordinates.y)
+                    // .text(d => d.data.label)
+                    // .attr("font-size", font_size * spider_font_scaling)
+                }
+            )
+
+            
+
+            enter.append("text")
+            .attr("x", d => getPathCoordinates(d)[1].x + 20 - d.label.length * (font_size / spider_font_scaling / 1.2))
+            .attr("y", d => getPathCoordinates(d)[1].y + 35)
+            .text(d => d.label)
+            .attr("font-size", font_size * spider_font_scaling)
+            .attr("font-weight", "bold")
+            .attr("fill", d => d3.color(window.colorscale(d.group)).darker(0.9))
+
+        }
+    );
+
+
 
     spiderSVG
     .append("g")

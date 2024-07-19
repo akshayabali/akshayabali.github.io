@@ -1,5 +1,5 @@
 // Specify the color scale.
-window.colorscale = d3.scaleOrdinal(d3.schemeCategory10);
+window.colorscale = d3.scaleOrdinal(d3.schemePaired);
 
 window.selected_doi = ""
 window.selected_node = null
