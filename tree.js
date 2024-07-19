@@ -2,7 +2,23 @@
 var canWidth  = 2800;
 var canHeight = 1050;
 
-window.colorscale = d3.scaleOrdinal(d3.schemePaired);
+var my_color_scale = [
+    "#b15928", // brown // Type A
+    "#a6cee3", // light blue // Type B
+    "#1f78b4", // dark blue // Type C
+    "#b2df8a", // light green // Type D
+    "#fb9a99", // pink // Type E
+    "#e31a1c", // red // Type F
+    "#fdbf6f",
+    "#ff7f00",
+    "#cab2d6",
+    "#6a3d9a",
+    "#ffff99",
+    "#33a02c",    
+];
+
+
+window.colorscale = d3.scaleOrdinal(my_color_scale);
 
 var tree_nodes = [
     {
@@ -10,7 +26,7 @@ var tree_nodes = [
         "image": "type_a.png",
         "id_name": "Type A",
         "description": "BIPOLOs are pure engineered biological systems designed for laboratory use and evaluated with precise benchtop instruments, such as plate readers for analyzing optical properties, without the need for microfluidics or electronic components.",
-        "group": 0,
+        "group": 1,
         "position": 0,
     },
     {
@@ -18,7 +34,7 @@ var tree_nodes = [
         "image": "type_b.png",
         "id_name": "Type B",
         "description": "BIHELOs are hybrid engineered biological systems that utilize microfluidics and are evaluated with precise electrical benchtop instruments, such as potentiostats and LCR meters, to analyze cellular properties and electrochemical reactions.",
-        "group": 1,
+        "group": 2,
         "position": 1,
     },
     {
@@ -26,7 +42,7 @@ var tree_nodes = [
         "image": "type_c.png",
         "id_name": "Type C",
         "description": "BIHOLOs are hybrid engineered biological systems analyzed using optical techniques within microfluidic setups and evaluated with benchtop instruments, such as flow cytometers, fluorescence detectors, and photon counters.",
-        "group": 2,
+        "group": 3,
         "position": 2,
     },
     {
@@ -34,7 +50,7 @@ var tree_nodes = [
         "image": "type_e.png",
         "id_name": "Type E",
         "description": "BIHEMCs are hybrid engineered biological systems with independently designed custom CMOS electronics and microfluidics, which are portable but not yet ready for stand-alone field deployment.",
-        "group": 4,
+        "group": 5,
         "position": 3,
     },
     {
@@ -42,7 +58,7 @@ var tree_nodes = [
         "image": "type_f.png",
         "id_name": "Type F",
         "description": "BSIHEMCs or CSBS are stand-alone, fully integrated field-deployable systems that use custom-designed CMOS electronics embedded within microfluidic housings, integrating all necessary components to ensure reliable data generation, wireless communication, and optimal integration between electronic and biological elements without needing any external components.",
-        "group": 5,
+        "group": 6,
         "position": 4,
     },
     {
@@ -50,7 +66,7 @@ var tree_nodes = [
         "image": "type_d.png",
         "id_name": "Type D",
         "description": "BIHEMOs are hybrid engineered biological systems equipped with portable commercial electronics for data generation, processing, and wireless communication, eliminating the need for highly precise benchtop equipment and thus facilitating deployment.",
-        "group": 3,
+        "group": 4,
         "position": 5,
     },
 ];

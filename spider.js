@@ -346,8 +346,20 @@ spiderSVG
                 return d3.color(stroke_color).darker(0.9);
             })
             .attr("fill", (d, i) => {
-                // brighter color
-                return d3.color(window.colorscale(spider_data[i].group)).brighter(0.9);
+                // if (spider_data[i].group == 6){
+                //     return d3.color(window.colorscale(spider_data[i].group)).darker(0.9);
+                // } else if (spider_data[i].group == 4) {
+                //     return d3.color(window.colorscale(spider_data[i].group)).brighter(0.6);
+                // } else
+                // return d3.color(window.colorscale(spider_data[i].group)).brighter(1.8);
+                switch(spider_data[i].group){
+                    case 6:
+                        return d3.color(window.colorscale(spider_data[i].group)).darker(0.9);
+                    case 4:
+                        return d3.color(window.colorscale(spider_data[i].group)).brighter(0.6);
+                    default:
+                        return d3.color(window.colorscale(spider_data[i].group)).brighter(1.8);
+                }
             })
             .attr("stroke-opacity", 1)
             .attr("opacity", 0.4)
