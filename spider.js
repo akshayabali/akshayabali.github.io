@@ -357,6 +357,10 @@ spiderSVG
                         return d3.color(window.colorscale(spider_data[i].group)).darker(0.9);
                     case 4:
                         return d3.color(window.colorscale(spider_data[i].group)).brighter(0.6);
+                    case 1:
+                        return d3.color(window.colorscale(spider_data[i].group)).brighter(0);
+                    case 2:
+                        return d3.color(window.colorscale(spider_data[i].group)).brighter(0);
                     default:
                         return d3.color(window.colorscale(spider_data[i].group)).brighter(1.8);
                 }
