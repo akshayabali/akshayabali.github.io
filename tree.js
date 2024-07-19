@@ -3,7 +3,7 @@ var canWidth  = 2800;
 var canHeight = 1050;
 
 var my_color_scale = [
-    "#b15928", // brown // Type A
+    "#cab2d6", // brown // Type A
     "#a6cee3", // light blue // Type B
     "#1f78b4", // dark blue // Type C
     "#b2df8a", // light green // Type D

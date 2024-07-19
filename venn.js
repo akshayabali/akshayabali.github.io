@@ -1384,9 +1384,9 @@
             // since we can support older versions of d3 as long as we don't force this,
             // I'm hackily redefining below. TODO: remove this and change to d3.schemeCategory10
             colourScheme = [
-                "#812918", // chestnut brown
+                "#9467bd", // chestnut brown
                 "#2ca02c", // cooked asparagus green // El
-                "#9467bd", // muted purple
+                "#ff7f00", // muted purple
                 "#d62728", // brick red // IC
                 "#ff7f0e", // safety orange // uf
                 "#5fb7f4", // muted blue // Bio
