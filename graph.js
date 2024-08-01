@@ -712,7 +712,7 @@ graph_data = {
 
     d3.selectAll(".node rect")
     .attr("fill", function (d) {
-        return colorscale(d.group);
+        return colorscale(d.group) + "b9";
     })
 
     var label_distance = circle_radius * 20;

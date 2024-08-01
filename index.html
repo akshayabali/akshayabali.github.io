@@ -36,14 +36,15 @@
         z-index: 1;
     }
 
-    #tree,
+    /* #tree,
     #graph,
     #venn,
     #graph_labels {
         max-width: fit-content;
 
-    }
+    } -->
 
+    */
     .venntooltip {
         position: absolute;
         text-align: center;
@@ -107,8 +108,7 @@
     </span>
 </div>
 
-<div class = "container-fluid">
-
+<div class = "container-fluid text-center">
 
 <div id="tree"></div>
 <div class="figure-desc">
@@ -119,51 +119,40 @@
     </p>
     <p>*Filter using the engineered system classification.</p>
 </div>
-<div class="container-fluid text-center">
-    <div class="row">
-        <div class="col">
-            <div id="venn"></div>
-        </div>
-        <div class="col">
-            <div id="graph"></div>
-        </div>
-        <div class="col">
-            <div id="spider"></div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col">
-            <div class="figure-desc">
-                <p>
-                    Fig 2: This Venn diagram categorizes research papers into the fields of microfluidics, synthetic biology, electronics, or any combination thereof. Mouse over to El, IC, Bio, and uF for their definitions. 
-                </p>
-                <p>*Filter using the Venn diagram for different fields</p>
-            </div>
-        </div>
-        <div class="col">
-            <div class="figure-desc">
-                <p>
-                    Fig 3: This dynamic graph illustrates how published papers on various engineered system classifications are interconnected through citations. 
-                </p>
-                <p>*Highlight papers using the Citation graph</p>
-            </div>
-        </div>
-        <div class="col">
-            <div class="figure-desc">
-                <p>
-                    Fig 4: This spider-web diagram compares engineered system classifications based on key performance metrics: precision, deployability, cost-effectiveness, disposability, and integration level. Mouse over to Spider-web metrics for their definitions.
-            </div>
-        </div>
-    </div>
+<div id="venn"></div>
+<div class="figure-desc">
+    <p>
+        Fig 2: This Venn diagram categorizes research papers into the fields of microfluidics, synthetic biology, electronics, or any combination thereof. Mouse over to El, IC, Bio, and uF for their definitions. 
+    </p>
+    <p>*Filter using the Venn diagram for different fields</p>
 </div>
+
+<div id="graph"></div>
+<div class="figure-desc">
+    <p>
+        Fig 3: This dynamic graph illustrates how published papers on various engineered system classifications are interconnected through citations. 
+    </p>
+    <p>*Highlight papers using the Citation graph</p>
+</div>
+<div id="spider"></div>
+<div class="figure-desc">
+<p>
+    Fig 4: This spider-web diagram compares engineered system classifications based on key performance metrics: precision, deployability, cost-effectiveness, disposability, and integration level. Mouse over to Spider-web metrics for their definitions.
+</p>
+</div>
+
+
 
 
 <button id="download">Download Data</button>
 <div id="table"></div>
+
+
 </div>
+
+
+
 <script src="./loader.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
-
 </html>
