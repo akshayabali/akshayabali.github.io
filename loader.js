@@ -1,18 +1,18 @@
 //JS to load all the scripts
 
-// var scripts = ["./tree.js", "./graph.js", "./venn.js", "spider.js", "./table.js"];
+var scripts = ["./tree.js", "./graph.js", "./venn.js", "spider.js", "./table.js"];
 
 
-var script_url = {
-    "table" : "https://raw.githubusercontent.com/akshayabali/akshayabali.github.io/pages/table.js",
-    "tree" : "https://raw.githubusercontent.com/akshayabali/akshayabali.github.io/pages/tree.js",
-    "spider" : "https://raw.githubusercontent.com/akshayabali/akshayabali.github.io/pages/spider.js",
-    "table" : "https://raw.githubusercontent.com/akshayabali/akshayabali.github.io/pages/table.js",
-    "graph" : "https://raw.githubusercontent.com/akshayabali/akshayabali.github.io/pages/graph.js",
-    "venn" : "https://raw.githubusercontent.com/akshayabali/akshayabali.github.io/pages/venn.js"
-}
+// var script_url = {
+//     "table" : "https://raw.githubusercontent.com/akshayabali/akshayabali.github.io/pages/table.js",
+//     "tree" : "https://raw.githubusercontent.com/akshayabali/akshayabali.github.io/pages/tree.js",
+//     "spider" : "https://raw.githubusercontent.com/akshayabali/akshayabali.github.io/pages/spider.js",
+//     "table" : "https://raw.githubusercontent.com/akshayabali/akshayabali.github.io/pages/table.js",
+//     "graph" : "https://raw.githubusercontent.com/akshayabali/akshayabali.github.io/pages/graph.js",
+//     "venn" : "https://raw.githubusercontent.com/akshayabali/akshayabali.github.io/pages/venn.js"
+// }
 
-var scripts = [script_url["table"], script_url["tree"], script_url["spider"], script_url["table"], script_url["graph"], script_url["venn"]];
+// var scripts = [script_url["table"], script_url["tree"], script_url["spider"], script_url["table"], script_url["graph"], script_url["venn"]];
 // Check if the query parameter "check" equals "programmingbiologypleaseloadmypage" to load the scripts
 
 function loadScript(i) {
