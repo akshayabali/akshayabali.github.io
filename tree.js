@@ -2,13 +2,28 @@
 var canWidth  = 2800;
 var canHeight = 1050;
 
+// var my_color_scale = [
+//     "#cab2d6", // brown // Type F
+//     "#a6cee3", // light blue // Type E
+//     "#1f78b4", // dark blue // Type D
+//     "#b2df8a", // light green // Type A
+//     "#fb9a99", // pink // Type B
+//     "#e31a1c", // red // Type C
+//     "#fdbf6f",
+//     "#ff7f00",
+//     "#cab2d6",
+//     "#6a3d9a",
+//     "#ffff99",
+//     "#33a02c",    
+// ];
+
 var my_color_scale = [
+    "#e31a1c", // red // Type F
+    "#fb9a99", // pink // Type E
+    "#b2df8a", // light green // Type D
     "#cab2d6", // brown // Type A
     "#a6cee3", // light blue // Type B
     "#1f78b4", // dark blue // Type C
-    "#b2df8a", // light green // Type D
-    "#fb9a99", // pink // Type E
-    "#e31a1c", // red // Type F
     "#fdbf6f",
     "#ff7f00",
     "#cab2d6",
