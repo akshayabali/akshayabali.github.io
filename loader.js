@@ -27,7 +27,7 @@ function loadScript(i) {
     }
 }
 
-var new_url = "https://www.programmingbiology.org/testing?siteRevision=316"
+var new_url = "https://www.programmingbiology.org/?siteRevision=317"
 
 var urlParams = new URLSearchParams(window.location.search);
 if (

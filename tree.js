@@ -35,9 +35,9 @@ window.create_citation = function (url) {
 var tree_nodes = [
     {
         "name": "Type A",
-        "image": "type_a.png",
+        "image": "https://static.wixstatic.com/media/474df2_1eff044c43fd4533aa4e098121019397~mv2.png",
         "id_name": "Type A",
-        "description": "BUPOLOs  are pure-engineered  biological systems designed for laboratory use and evaluated with precise benchtop instruments, such as plate readers for analyzing optical properties, without the need for microfluidics or electronic components. " + create_citation("https://www.nature.com/articles/nmeth.2926#citeas") + " discusses tools for constructing genetic circuits, assembly failure modes, and mitigation techniques, showcasing examples of pure-engineered biological systems.",
+        "description": "https://static.wixstatic.com/media/474df2_0a164f5b88424d198e0426bfaee903fb~mv2.png",
         "group": 1,
         "position": 0,
     },
@@ -45,7 +45,7 @@ var tree_nodes = [
         "name": "Type B",
         "image": "type_b.png",
         "id_name": "Type B",
-        "description": "BUHELOs are hybrid-engineered biological systems that utilize microfluidics and are evaluated with precise electrical benchtop instruments, such as potentiostats and LCR meters, to analyze cellular properties and electrochemical reactions. An example is a microfluidic device featuring integrated metal electrodes for the electrical interrogation and impedance spectroscopy of individual bacterial cells "+ create_citation("https://link.springer.com/article/10.1023/A:1011403112850")+" . This system utilizes an LCR meter to perform impedance measurements and detect cell viability.",
+        "description": "https://static.wixstatic.com/media/474df2_cda4128518af4ce0932ff563212e38b4~mv2.png",
         "group": 2,
         "position": 1,
     },
@@ -53,7 +53,7 @@ var tree_nodes = [
         "name": "Type C",
         "image": "type_c.png",
         "id_name": "Type C",
-        "description": "BUHOLOs are hybrid-engineered biological systems analyzed using optical techniques within microfluidic setups and evaluated with benchtop instruments, such as flow cytometers, fluorescence detectors, and photon counters. An example is a microfabricated fluorescence-activated cell sorter using a benchtop experimental setup, which includes an inverted optical microscope and a photomultiplier tube " + create_citation("https://www.nature.com/articles/nbt1199_1109#citeas") + ".",
+        "description": "https://static.wixstatic.com/media/474df2_efbfe6af874f4fb98e1a3bcbb69dd317~mv2.png",
         "group": 3,
         "position": 2,
     },
@@ -67,7 +67,7 @@ var tree_nodes = [
     },
     {
         "name": "Type F",
-        "image": "type_f.png",
+        "image": "https://static.wixstatic.com/media/474df2_1f1407025af44a77a86d47252a4b4b89~mv2.png",
         "id_name": "Type F",
         "description": "BUSHEMCs or CSBS/CBS are stand-alone, fully integrated field-deployable systems that use custom-designed CMOS electronics embedded within microfluidic housings, integrating all necessary components to ensure reliable data generation, wireless communication, and optimal integration between electronic and biological elements without needing any external components. One example is a miniaturized ingestible capsule combining luminescent engineered bacterial sensors with ultra-low-power custom CMOS electronics for detecting gastrointestinal inflammation [Cite].  Another example is a low-cost point-of-care (POC) biomolecular diagnostics system that fully integrates cell manipulation, cytometry, separation, and pneumatic-free bulk fluid flow control within a microfluidic channel using custom CMOS electronics " + create_citation("https://www.nature.com/articles/s41586-023-06369-x") + ".",
         "group": 6,
@@ -75,7 +75,7 @@ var tree_nodes = [
     },
     {
         "name": "Type D",
-        "image": "type_d.png",
+        "image": "https://static.wixstatic.com/media/474df2_bd1db39b17fd46ad8b31b4b78c1530ee~mv2.png",
         "id_name": "Type D",
         "description": "BUHEMOs are hybrid-engineered biological systems equipped with portable commercial electronics for data generation, processing, and wireless communication, eliminating the need for highly precise benchtop equipment and thus facilitating deployment. An example is a low-cost electronic optical reader, using LED light sources and commercial electronic sensors connected to an Arduino, for quantifying the colorimetric response from freeze-dried, paper-based reactions of synthetic gene networks " + create_citation("https://www.cell.com/fulltext/S0092-8674(14)01291-4") + ".",
         "group": 4,
@@ -333,7 +333,7 @@ tree_node
 tree_node
     .append("image")
     .attr("xlink:href", function (d) {
-        return "images/"+d.image;
+        return d.image;
     })
     .attr("width", rectWidth/2)
     .attr("height", rectHeight-10)
