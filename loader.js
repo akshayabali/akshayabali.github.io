@@ -27,13 +27,17 @@ function loadScript(i) {
     }
 }
 
+var new_url = "https://www.programmingbiology.org/testing?siteRevision=316"
+
 var urlParams = new URLSearchParams(window.location.search);
 if (
     urlParams.has("check") &&
     urlParams.get("check") === "programmingbiologypleaseloadmypage"
 ) {
-    document.getElementsByTagName("BODY")[0].style.display = "block";
-    loadScript(0);
+    // document.getElementsByTagName("BODY")[0].style.display = "block";
+    // loadScript(0);
+    // goto new url
+    window.location.href = new_url;
 } else {
     var button = document.getElementById("download");
     // Hide the download button
