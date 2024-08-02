@@ -2134,7 +2134,7 @@ div
     .style("stroke", "#000")
     .style("stroke-width", 3);
 
-window.selectedVenn = null;
+window.selected_venn = null;
 
 div
     .selectAll("g")
@@ -2168,13 +2168,13 @@ div
         tooltip.style("opacity", 0);
 
         // tooltip.transition().duration(400).style("opacity", 0);
-        if (window.selectedVenn == null) {
+        if (window.selected_venn == null) {
             var selection = d3.select(this).transition("tooltip").duration(400);
             selection
                 .select("path")
                 .style("fill-opacity", d.sets.length == 1 ? 0.25 : 0.0)
                 .style("stroke-opacity", 0);
-        } else if (window.selectedVenn.data != d) {
+        } else if (window.selected_venn.data != d) {
             var selection = d3.select(this).transition("tooltip").duration(400);
             selection
                 .select("path")
@@ -2183,39 +2183,24 @@ div
         }
     })
     .on("click", function (event, d) {
-        d3.select(selected_tree).select("rect").attr("stroke-width", 1.5);
-        window.selected_tree = null;
-
-        if (window.selectedVenn != null) {
-            var selection = d3
-                .select(window.selectedVenn.element)
-                .transition("tooltip")
-                .duration(400);
-            selection
-                .select("path")
-                .style("fill-opacity", selectedVenn.data.sets.length == 1 ? 0.25 : 0.0)
-                .style("stroke-opacity", 0);
-            if (window.selectedVenn.element == this) {
-                window.selectedVenn = null;
-                // dataset = dataset[1 tp em]
-                updateTable(dataset.slice(0, dataset.length));
-                return;
+        if (selected_venn != null) {
+            if ("element" in window.selected_venn) {
+                if (selected_venn.element == this) {
+                    clear_selected();
+                    return;
+                }
             }
         }
-        selectedVenn = {
+        clear_selected();
+        selected_venn = {
             element: this,
             data: d,
         };
-        var selection = d3.select(this).transition("tooltip").duration(400);
-        selection
-            .select("path")
-            .style("fill-opacity", d.sets.length == 1 ? 0.4 : 0.1)
-            .style("stroke-opacity", 1);
+        d3.select(selected_tree).select("rect").attr("stroke-width", 1.5);
 
         filter = d["label_1"];
         filters = filter.split(", ");
         headers = dataset[0];
-        // console.log("filters: ", filters);
         my_dataset = dataset.filter(function (d) {
             for (i = 0; i < filters.length; i++) {
                 if (!d[0].toLowerCase().includes(filters[i].toLowerCase())) {
@@ -2225,7 +2210,46 @@ div
             return true;
         });
 
-        // Add headers to the first row
         my_dataset.unshift(headers);
         updateTable(my_dataset);
+
+        // if (window.selected_venn != null) {
+        //     var selection = d3
+        //         .select(window.selected_venn.element)
+        //         .transition("tooltip")
+        //         .duration(400);
+        //     selection
+        //         .select("path")
+        //         .style("fill-opacity", selected_venn.data.sets.length == 1 ? 0.25 : 0.0)
+        //         .style("stroke-opacity", 0);
+        //     if (window.selected_venn.element == this) {
+        //         window.selected_venn = null;
+        //         // dataset = dataset[1 tp em]
+        //         updateTable(dataset.slice(0, dataset.length));
+        //         return;
+        //     }
+        // }
+
+        // var selection = d3.select(this).transition("tooltip").duration(400);
+        // selection
+        //     .select("path")
+        //     .style("fill-opacity", d.sets.length == 1 ? 0.4 : 0.1)
+        //     .style("stroke-opacity", 1);
+
+        // filter = d["label_1"];
+        // filters = filter.split(", ");
+        // headers = dataset[0];
+        // // console.log("filters: ", filters);
+        // my_dataset = dataset.filter(function (d) {
+        //     for (i = 0; i < filters.length; i++) {
+        //         if (!d[0].toLowerCase().includes(filters[i].toLowerCase())) {
+        //             return false;
+        //         }
+        //     }
+        //     return true;
+        // });
+
+        // // Add headers to the first row
+        // my_dataset.unshift(headers);
+        // updateTable(my_dataset);
     });

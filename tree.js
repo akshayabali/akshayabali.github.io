@@ -124,6 +124,38 @@ decisions = [
     }
 ]
 
+window.clear_selected = function () {
+    if (selected_tree != null) {
+        d3.select(selected_tree).select("rect").attr("stroke-width", 1.5);
+        selected_tree = null;
+    }
+    if (selected_venn != null) {
+        var selection = d3.select(window.selected_venn.element).transition("tooltip").duration(400);
+        selection.select("path")
+            .style("fill-opacity", selected_venn.data.sets.length == 1 ? .25 : .0)
+            .style("stroke-opacity", 0);
+        window.selected_venn = null;
+    }
+    if (selected_spider != null) {
+        d3.select(selected_spider).attr("stroke", d3.select(selected_spider).attr("my-stroke"));
+    }
+    my_dataset = dataset;
+    updateTable(my_dataset);
+    return;
+}
+
+window.select_dataset = function (id) {
+    headers = dataset[0];
+    my_dataset = dataset.filter(function (d) {
+        if (d[17].includes(id)) {
+            return true;
+        }
+        return false;
+    });
+    my_dataset.unshift(headers);
+    updateTable(my_dataset);
+}
+
 
 var tree_nodes_length = tree_nodes.length;
 
@@ -253,33 +285,14 @@ var tree_node = canvas
     })
     .on("click", function (event, d) {
         var id = d.name.split(" ")[1];
-        if (selected_tree != null) {
-            d3.select(selected_tree).select("rect").attr("stroke-width", 1.5);
-            if (selected_tree == this) {
-                selected_tree = null;
-                my_dataset = dataset;
-                updateTable(my_dataset);    
-                return;
-            }
+        if (selected_tree == this) {
+            clear_selected();
+            return;
         }
+        clear_selected();
         selected_tree = this;
-        if (selectedVenn != null) {
-            var selection = d3.select(window.selectedVenn.element).transition("tooltip").duration(400);
-            selection.select("path")
-                .style("fill-opacity", selectedVenn.data.sets.length == 1 ? .25 : .0)
-                .style("stroke-opacity", 0);
-            window.selectedVenn = null;
-        }
         d3.select(this).select("rect").attr("stroke-width", 4);
-        headers = dataset[0];
-        my_dataset = dataset.filter(function (d) {
-            if (d[17].includes(id)) {
-                return true;
-            }
-            return false;
-        });
-        my_dataset.unshift(headers);
-        updateTable(my_dataset);
+        select_dataset(id);
     });
 
 

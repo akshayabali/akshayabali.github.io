@@ -1,10 +1,11 @@
 let data = [];
-let features = ["Integration Level", "Cost Effectiveness", "Precision", "Disposability", "Deployability",];
+let features = ["Integration Level", "Cost Effectiveness", "Precision", "Reuse", "Deployability",];
 
 var feature_description = {
     "Integration Level": "The level of integration improves as more functions are combined into a single device.",
     "Deployability": "Field deployability improves when systems are self-contained and use wireless communications.",
     "Disposability": "Reuse improves for in-lab systems used for development, whereas hybrid systems designed for deployment are disposable.",
+    "Reuse": "Reuse improves for in-lab systems used for development, whereas hybrid systems designed for deployment are disposable.",
     "Cost Effectiveness": "Costs increase for systems in the development stage requiring precise benchtop equipment in a laboratory environment, whereas fully integrated hybrid systems using CMOS electronics are designed to be cost-effective for field deployment.",
     "Precision": "Measurements using expensive benchtop equipment are more precise than those conducted with cost-effective portable CMOS electronics."
 }
@@ -14,7 +15,7 @@ var feature_description = {
 // Precision 5, 4, 4, 3, 3, 3
 // Cost Effectiveness 1, 2, 2, 3, 4, 5
 // Deployability 1, 1, 1, 3, 4, 5
-// Disposability 1, 1, 1, 3, 4, 5
+// Reuse 5, 4, 4 3, 2, 1
 
 var spider_data = [
     {
@@ -24,9 +25,9 @@ var spider_data = [
         "data": {
             "Integration Level": 5,
             "Deployability": 5,
-            "Disposability": 5,
             "Precision": 3,
             "Cost Effectiveness": 5,
+            "Reuse": 1,
         },
     },
     {
@@ -36,9 +37,9 @@ var spider_data = [
         "data": {
             "Integration Level": 3,
             "Deployability": 4,
-            "Disposability": 4,
             "Precision": 3,
             "Cost Effectiveness": 4,
+            "Reuse": 2,
         },
     },
     {
@@ -48,32 +49,9 @@ var spider_data = [
         "data": {
             "Integration Level": 3,
             "Deployability": 3,
-            "Disposability": 3,
             "Precision": 3,
             "Cost Effectiveness": 3,
-        },
-    },
-    // {
-    //     "name" : "Type C",
-    //     "group" : 3,
-    //     "data" : {
-    //         "Integration Level": 1,
-    //         "Deployability": 1,
-    //         "Disposability": 1,
-    //         "Precision": 3,
-    //         "Cost Effectiveness": 2,            
-    //     },
-    // },
-    {
-        "name": "Type B, C",
-        "label": "b, c",
-        "group": 2,
-        "data": {
-            "Integration Level": 1,
-            "Deployability": 1,
-            "Disposability": 1,
-            "Precision": 4,
-            "Cost Effectiveness": 2,
+            "Reuse": 3,
         },
     },
     {
@@ -83,9 +61,21 @@ var spider_data = [
         "data": {
             "Integration Level": 1,
             "Deployability": 1,
-            "Disposability": 1,
             "Precision": 5,
             "Cost Effectiveness": 1,
+            "Reuse": 5,
+        },
+    },
+    {
+        "name": "Type B, C",
+        "label": "b, c",
+        "group": 2,
+        "data": {
+            "Integration Level": 1,
+            "Deployability": 1,
+            "Precision": 4,
+            "Cost Effectiveness": 2,
+            "Reuse": 4,
         },
     },
 ];
@@ -293,6 +283,8 @@ function getPathCoordinates(d) {
     return coordinates;
 }
 
+window.selected_spider = null;
+
 // draw the path element
 spiderSVG
     .append("g")
@@ -337,7 +329,6 @@ spiderSVG
             .on("mouseover", function (event, d) {
                 // Black
                 d3.select(this).attr("stroke", "black");
-                // d3.select(this).attr("stroke-opacity", 1);
 
                 var element = d3.select(this).attr("cur_name");
 
@@ -352,10 +343,22 @@ spiderSVG
             })
             .on("mouseout", function (event, d) {
                 tooltip.style("opacity", 0);
-
-
-                var this_color = d3.select(this).attr("my-stroke");
-                d3.select(this).attr("stroke", this_color);
+                // var this_color = d3.select(this).attr("my-stroke");
+                // d3.select(this).attr("stroke", this_color);
+                if (selected_spider != this) {
+                    d3.select(this).attr("stroke", d3.select(this).attr("my-stroke"));
+                }
+            })
+            .on("click", function (event, d) {
+                var id = d3.select(this).attr("cur_name").split(" ")[1];
+                if (selected_spider == this) {
+                    clear_selected();
+                    return;    
+                }
+                clear_selected();
+                selected_spider = this;
+                d3.select(selected_spider).attr("stroke", "black");
+                select_dataset(id);
             })
     );
 
