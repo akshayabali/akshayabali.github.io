@@ -1385,8 +1385,10 @@
             // I'm hackily redefining below. TODO: remove this and change to d3.schemeCategory10
             colourScheme = [
                 "#d62728", // brick red // Bio
+                // "#2ca02c", // cooked asparagus green // El
+                "#b15928", // brown          // Type
+                // "#ff7f00", // muted purple // uF
                 "#2ca02c", // cooked asparagus green // El
-                "#ff7f00", // muted purple // uF
                 "#5fb7f4", // muted blue // IC
                 "#9467bd", // chestnut brown // Bio
                 "#e377c2", // raspberry yogurt pink

@@ -5,7 +5,8 @@ var canHeight = 1050;
 var my_color_scale = [
     "#1f78b4", // dark blue      // Type F
     "#a6cee3", // light blue     // Type E
-    "#b2df8a", // light green    // Type D
+    // "#b2df8a", // light green    // Type D
+    "#b15928", // brown          // Type
     "#e31a1c", // red            // Type A
     "#fb9a99", // pink           // Type B
     "#6a3d9a", // purple         // Type C
