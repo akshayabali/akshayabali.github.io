@@ -34,10 +34,13 @@ if (
     urlParams.has("check") &&
     urlParams.get("check") === "programmingbiologypleaseloadmypage"
 ) {
-    // document.getElementsByTagName("BODY")[0].style.display = "block";
-    // loadScript(0);
-    // goto new url
-    window.location.href = new_url;
+    if (window.location.hostname.includes("127.0.0.1")) {
+        document.getElementsByTagName("BODY")[0].style.display = "block";
+        loadScript(0);
+    } else {
+        // goto new url
+        window.location.href = new_url;
+    }
 } else {
     var button = document.getElementById("download");
     // Hide the download button
