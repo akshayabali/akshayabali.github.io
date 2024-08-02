@@ -51,15 +51,15 @@ var tree_nodes = [
     },
     {
         "name": "Type C",
-        "image": "type_c.png",
+        "image": "https://static.wixstatic.com/media/474df2_efbfe6af874f4fb98e1a3bcbb69dd317~mv2.png",
         "id_name": "Type C",
-        "description": "https://static.wixstatic.com/media/474df2_efbfe6af874f4fb98e1a3bcbb69dd317~mv2.png",
+        "description": "BUHOLOs are hybrid-engineered biological systems analyzed using optical techniques within microfluidic setups and evaluated with benchtop instruments, such as flow cytometers, fluorescence detectors, and photon counters. An example is a microfabricated fluorescence-activated cell sorter using a benchtop experimental setup, which includes an inverted optical microscope and a photomultiplier tube " + create_citation("https://www.nature.com/articles/nbt1199_1109#citeas") + ".",
         "group": 3,
         "position": 2,
     },
     {
         "name": "Type E",
-        "image": "type_e.png",
+        "image": "https://static.wixstatic.com/media/474df2_1eff044c43fd4533aa4e098121019397~mv2.png",
         "id_name": "Type E",
         "description": "BUHEMCs are hybrid-engineered biological systems with independently designed custom CMOS electronics and microfluidics, which are portable but not yet ready for stand-alone field deployment. An example is a modular droplet microfluidic device embedded with custom CMOS electronic sensors for rapid screening of engineered biological systems under deployment conditions, although it requires syringe pumps and is not sufficiently miniaturized for field deployment " + create_citation("https://ieeexplore.ieee.org/abstract/document/10454379") + ".",
         "group": 5,
@@ -333,7 +333,7 @@ tree_node
 tree_node
     .append("image")
     .attr("xlink:href", function (d) {
-        return d.image;
+        return "images/"+d.image;
     })
     .attr("width", rectWidth/2)
     .attr("height", rectHeight-10)
