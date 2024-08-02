@@ -35,17 +35,17 @@ window.create_citation = function (url) {
 var tree_nodes = [
     {
         "name": "Type A",
-        "image": "https://static.wixstatic.com/media/474df2_1eff044c43fd4533aa4e098121019397~mv2.png",
+        "image": "https://static.wixstatic.com/media/474df2_0a164f5b88424d198e0426bfaee903fb~mv2.png",
         "id_name": "Type A",
-        "description": "https://static.wixstatic.com/media/474df2_0a164f5b88424d198e0426bfaee903fb~mv2.png",
+        "description": "BUPOLOs  are pure-engineered  biological systems designed for laboratory use and evaluated with precise benchtop instruments, such as plate readers for analyzing optical properties, without the need for microfluidics or electronic components. " + create_citation("https://www.nature.com/articles/nmeth.2926#citeas") + " discusses tools for constructing genetic circuits, assembly failure modes, and mitigation techniques, showcasing examples of pure-engineered biological systems.",
         "group": 1,
         "position": 0,
     },
     {
         "name": "Type B",
-        "image": "type_b.png",
+        "image": "https://static.wixstatic.com/media/474df2_cda4128518af4ce0932ff563212e38b4~mv2.png",
         "id_name": "Type B",
-        "description": "https://static.wixstatic.com/media/474df2_cda4128518af4ce0932ff563212e38b4~mv2.png",
+        "description": "BUHELOs are hybrid-engineered biological systems that utilize microfluidics and are evaluated with precise electrical benchtop instruments, such as potentiostats and LCR meters, to analyze cellular properties and electrochemical reactions. An example is a microfluidic device featuring integrated metal electrodes for the electrical interrogation and impedance spectroscopy of individual bacterial cells "+ create_citation("https://link.springer.com/article/10.1023/A:1011403112850")+" . This system utilizes an LCR meter to perform impedance measurements and detect cell viability.",
         "group": 2,
         "position": 1,
     },
@@ -333,7 +333,7 @@ tree_node
 tree_node
     .append("image")
     .attr("xlink:href", function (d) {
-        return "images/"+d.image;
+        return d.image;
     })
     .attr("width", rectWidth/2)
     .attr("height", rectHeight-10)
