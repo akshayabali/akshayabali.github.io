@@ -2,36 +2,22 @@
 var canWidth  = 2800;
 var canHeight = 1050;
 
-// var my_color_scale = [
-//     "#cab2d6", // brown // Type F
-//     "#a6cee3", // light blue // Type E
-//     "#1f78b4", // dark blue // Type D
-//     "#b2df8a", // light green // Type A
-//     "#fb9a99", // pink // Type B
-//     "#e31a1c", // red // Type C
-//     "#fdbf6f",
-//     "#ff7f00",
-//     "#cab2d6",
-//     "#6a3d9a",
-//     "#ffff99",
-//     "#33a02c",    
-// ];
-
 var my_color_scale = [
-    "#e31a1c", // red // Type F
-    "#fb9a99", // pink // Type E
-    "#b2df8a", // light green // Type D
-    "#cab2d6", // brown // Type A
-    "#a6cee3", // light blue // Type B
-    "#1f78b4", // dark blue // Type C
-    "#fdbf6f",
-    "#ff7f00",
-    "#cab2d6",
-    "#6a3d9a",
-    "#ffff99",
-    "#33a02c",    
+    "#1f78b4", // dark blue      // Type F
+    "#a6cee3", // light blue     // Type E
+    "#b2df8a", // light green    // Type D
+    "#e31a1c", // red            // Type A
+    "#fb9a99", // pink           // Type B
+    "#6a3d9a", // purple         // Type C
+    "#ff7f00", // orange         // Type C+D
+    "#fdbf6f", // mustard        // Type C+B
+    "#cab2d6", // brown          // Type 
+    "#ffff99", // yellow         // Type
+    "#33a02c", // green          // Type 
+    "#b15928", // brown          // Type
+    "#f781bf", // pink           // Type
+    "#B3B3B3", // grey           // Type 
 ];
-
 
 
 
