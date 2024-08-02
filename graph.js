@@ -720,9 +720,9 @@ graph_data = {
 
     const label_box = d3.select("#graph_labels")
         .append("svg")
-        .attr("width", window.innerWidth * 0.9)
+        .attr("width", window.innerWidth * 0.6)
         .attr("height", window.innerHeight / 20)
-        .attr("viewBox", [0, 0, width, 50])
+        .attr("viewBox", [0, 0, 1300, 65])
         .attr("style", "max-width: 100%; height: auto; display:block; margin:auto;");
     
     const label = label_box.append("g")
