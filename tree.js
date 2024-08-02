@@ -18,14 +18,25 @@ var my_color_scale = [
 ];
 
 
+
+
 window.colorscale = d3.scaleOrdinal(my_color_scale);
+
+window.citation_count = 0;
+window.citation_object = {};
+
+window.create_citation = function (url) {
+    citation_count += 1;
+    return "[" + citation_count + "]";
+}
+
 
 var tree_nodes = [
     {
         "name": "Type A",
         "image": "type_a.png",
         "id_name": "Type A",
-        "description": "BIPOLOs are pure engineered biological systems designed for laboratory use and evaluated with precise benchtop instruments, such as plate readers for analyzing optical properties, without the need for microfluidics or electronic components.",
+        "description": "BUPOLOs  are pure-engineered  biological systems designed for laboratory use and evaluated with precise benchtop instruments, such as plate readers for analyzing optical properties, without the need for microfluidics or electronic components. " + create_citation("https://www.nature.com/articles/nmeth.2926#citeas") + " discusses tools for constructing genetic circuits, assembly failure modes, and mitigation techniques, showcasing examples of pure-engineered biological systems.",
         "group": 1,
         "position": 0,
     },
@@ -33,7 +44,7 @@ var tree_nodes = [
         "name": "Type B",
         "image": "type_b.png",
         "id_name": "Type B",
-        "description": "BIHELOs are hybrid engineered biological systems that utilize microfluidics and are evaluated with precise electrical benchtop instruments, such as potentiostats and LCR meters, to analyze cellular properties and electrochemical reactions.",
+        "description": "BUHELOs are hybrid-engineered biological systems that utilize microfluidics and are evaluated with precise electrical benchtop instruments, such as potentiostats and LCR meters, to analyze cellular properties and electrochemical reactions. An example is a microfluidic device featuring integrated metal electrodes for the electrical interrogation and impedance spectroscopy of individual bacterial cells "+ create_citation("https://link.springer.com/article/10.1023/A:1011403112850")+" . This system utilizes an LCR meter to perform impedance measurements and detect cell viability.",
         "group": 2,
         "position": 1,
     },
@@ -41,7 +52,7 @@ var tree_nodes = [
         "name": "Type C",
         "image": "type_c.png",
         "id_name": "Type C",
-        "description": "BIHOLOs are hybrid engineered biological systems analyzed using optical techniques within microfluidic setups and evaluated with benchtop instruments, such as flow cytometers, fluorescence detectors, and photon counters.",
+        "description": "BUHOLOs are hybrid-engineered biological systems analyzed using optical techniques within microfluidic setups and evaluated with benchtop instruments, such as flow cytometers, fluorescence detectors, and photon counters. An example is a microfabricated fluorescence-activated cell sorter using a benchtop experimental setup, which includes an inverted optical microscope and a photomultiplier tube " + create_citation("https://www.nature.com/articles/nbt1199_1109#citeas") + ".",
         "group": 3,
         "position": 2,
     },
@@ -49,7 +60,7 @@ var tree_nodes = [
         "name": "Type E",
         "image": "type_e.png",
         "id_name": "Type E",
-        "description": "BIHEMCs are hybrid engineered biological systems with independently designed custom CMOS electronics and microfluidics, which are portable but not yet ready for stand-alone field deployment.",
+        "description": "BUHEMCs are hybrid-engineered biological systems with independently designed custom CMOS electronics and microfluidics, which are portable but not yet ready for stand-alone field deployment. An example is a modular droplet microfluidic device embedded with custom CMOS electronic sensors for rapid screening of engineered biological systems under deployment conditions, although it requires syringe pumps and is not sufficiently miniaturized for field deployment " + create_citation("https://ieeexplore.ieee.org/abstract/document/10454379") + ".",
         "group": 5,
         "position": 3,
     },
@@ -57,7 +68,7 @@ var tree_nodes = [
         "name": "Type F",
         "image": "type_f.png",
         "id_name": "Type F",
-        "description": "BSIHEMCs or CSBS are stand-alone, fully integrated field-deployable systems that use custom-designed CMOS electronics embedded within microfluidic housings, integrating all necessary components to ensure reliable data generation, wireless communication, and optimal integration between electronic and biological elements without needing any external components.",
+        "description": "BUSHEMCs or CSBS/CBS are stand-alone, fully integrated field-deployable systems that use custom-designed CMOS electronics embedded within microfluidic housings, integrating all necessary components to ensure reliable data generation, wireless communication, and optimal integration between electronic and biological elements without needing any external components. One example is a miniaturized ingestible capsule combining luminescent engineered bacterial sensors with ultra-low-power custom CMOS electronics for detecting gastrointestinal inflammation [Cite].  Another example is a low-cost point-of-care (POC) biomolecular diagnostics system that fully integrates cell manipulation, cytometry, separation, and pneumatic-free bulk fluid flow control within a microfluidic channel using custom CMOS electronics " + create_citation("https://www.nature.com/articles/s41586-023-06369-x") + ".",
         "group": 6,
         "position": 4,
     },
@@ -65,7 +76,7 @@ var tree_nodes = [
         "name": "Type D",
         "image": "type_d.png",
         "id_name": "Type D",
-        "description": "BIHEMOs are hybrid engineered biological systems equipped with portable commercial electronics for data generation, processing, and wireless communication, eliminating the need for highly precise benchtop equipment and thus facilitating deployment.",
+        "description": "BUHEMOs are hybrid-engineered biological systems equipped with portable commercial electronics for data generation, processing, and wireless communication, eliminating the need for highly precise benchtop equipment and thus facilitating deployment. An example is a low-cost electronic optical reader, using LED light sources and commercial electronic sensors connected to an Arduino, for quantifying the colorimetric response from freeze-dried, paper-based reactions of synthetic gene networks " + create_citation("https://www.cell.com/fulltext/S0092-8674(14)01291-4") + ".",
         "group": 4,
         "position": 5,
     },
@@ -80,7 +91,7 @@ decisions = [
         "level": 1,
         "left_text": "Yes",
         "right_text": "No",
-        "description": "Stand-alone systems are classified as such when they fully integrate custom-designed wireless electronics within miniaturized microfluidic enclosures, thus eliminating the need for external wiring during field deployment. Stand-alone systems require minimal physical interaction, may be single-use, and are likely deployed in remote, inaccessible areas.",
+        "description": "Stand-alone systems are classified as such when they fully integrate custom-designed wireless electronics within miniaturized microfluidic enclosures, thus eliminating the need for external wiring during field deployment. Stand-alone systems require minimal physical interaction, may be single-use, and are likely deployed in remote, inaccessible areas",
     },
     {
         "name": "Process",
@@ -90,7 +101,7 @@ decisions = [
         "level": 2,
         "left_text": "Custom IC",
         "right_text": "Commercial Electronics",
-        "description": "Portable systems use either off-the-shelf commercial electronics or custom-designed integrated circuits (ICs) tailored to specific application needs. The selection of these options depends on the availability of components, packaging needs, cost, and the expertise of the development group related to custom electronics design, development, fabrication, and test.",
+        "description": "Portable systems use either off-the-shelf commercial electronics or custom-designed integrated circuits (ICs) tailored to specific application needs. The selection of these options depends on the availability of components, packaging needs, cost, and the expertise of the development group related to custom electronics design, development, fabrication, and test. ",
     },
     {
         "name": "Measurement",

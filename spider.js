@@ -2,12 +2,11 @@ let data = [];
 let features = ["Integration Level", "Cost Effectiveness", "Precision", "Reuse", "Deployability",];
 
 var feature_description = {
-    "Integration Level": "The level of integration improves as more functions are combined into a single device.",
-    "Deployability": "Field deployability improves when systems are self-contained and use wireless communications.",
-    "Disposability": "Reuse improves for in-lab systems used for development, whereas hybrid systems designed for deployment are disposable.",
-    "Reuse": "Reuse improves for in-lab systems used for development, whereas hybrid systems designed for deployment are disposable.",
-    "Cost Effectiveness": "Costs increase for systems in the development stage requiring precise benchtop equipment in a laboratory environment, whereas fully integrated hybrid systems using CMOS electronics are designed to be cost-effective for field deployment.",
-    "Precision": "Measurements using expensive benchtop equipment are more precise than those conducted with cost-effective portable CMOS electronics."
+    "Integration Level": "The level of integration changes as more functions are combined into a single device. Integration can improve the deployment abilities, reproducibility, size, and ease of use. The tradeoff is that devices must be produced at a volume to justify the NRE costs.",
+    "Deployability": "Field deployability increases when systems are fully integrated, require minimal physical interaction after deployment, and utilize wireless communications.",
+    "Reuse": "Reuse improves for in-lab systems used for development, whereas hybrid systems designed for deployment may be single-use.",
+    "Cost Effectiveness": "Costs increase for systems in the development stage that require precise benchtop equipment in a laboratory environment. Conversely, fully-integrated hybrid systems using CMOS electronics are designed to be cost-effective for field deployment. Although low-volume production (e.g., 100 CMOS chips) incurs high initial costs for photomasks, wafer processing, and testing, scaling up production spreads these fixed costs, significantly lowering per-unit costs and making large-scale production of the fully-integrated hybrid systems more economical.",
+    "Precision": "Measurements using expensive benchtop equipment are more precise than those conducted with cost-effective portable CMOS electronics. Precision is higher in benchtop equipment because it can utilize more powerful processing components without resource constraints. In contrast, portable CMOS electronics face precision limitations due to design trade-offs for compactness and power efficiency, such as limited processing power and storage capacity."
 }
 
 // A to F 
