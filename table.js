@@ -246,7 +246,7 @@ d3.select('fieldset').on('change', function () {
     // using field_value_map and values to get the actual keys for columns to hide
     var hidden_columns = [];
     values.forEach(function (d) {
-        var value = field_map[field_value_map[d]];
+        var value = field_map[d];
         if (!hidden_columns.includes(value)) {
             hidden_columns.push(value);
         }
