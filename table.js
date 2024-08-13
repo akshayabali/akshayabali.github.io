@@ -164,10 +164,43 @@ d3.select("#download").on("click", function () {
 });
 
 
+var field_map = {
+    "institution": [3],
+    "location": [4],
+    "venue": [6],
+    "year": [7],
+    "citations" : [8],
+    "bio" : [9, 10, 11, 12, 13, 14, 15],
+}
+
+
 d3.select('fieldset').on('change', function () {
     // Get all checked checkboxes in the fieldset
     var checked = d3.selectAll('fieldset input:checked');
-    console.log(checked);
+    // Get the values of the checked checkboxes
+    var values = checked.nodes().map(function (d) {
+        return d.value;
+    });
+
+    // Get the field_map of all the checked values
+    var field_map_values = values.map(function (d) {
+        return field_map[d];
+    });
+
+    // Flatten the array
+    field_map_values = field_map_values.flat();
+
+    // Hide columns that are in the field_map_values
+    var new_data_set = window.dataset.map(function (d) {
+        return d.filter(function (d, i) {
+            return !field_map_values.includes(i);
+        });
+    });
+
+    // Update the table with the new data
+    updateTable(new_data_set);
+    console.log(new_data_set);
+
 });
 
 
