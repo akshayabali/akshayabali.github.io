@@ -258,8 +258,8 @@ d3.select('fieldset').on('change', function () {
     var hidden_column_names = [];
 
     for (var name in window.dataset[0]) {
-        if (!hidden_columns.includes(name)) {
-            hidden_column_names.push(name);
+        if (!hidden_columns.includes(window.dataset[0][name])) {
+            hidden_column_names.push(window.dataset[0][name]);
         }
     }
 
