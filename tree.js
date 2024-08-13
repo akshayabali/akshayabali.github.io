@@ -160,7 +160,7 @@ window.clear_selected = function () {
 window.select_dataset = function (id) {
     headers = dataset[0];
     my_dataset = dataset.filter(function (d) {
-        if (d[17].includes(id)) {
+        if (d[field_map["group"][0]].includes(id)) {
             return true;
         }
         return false;
@@ -254,7 +254,7 @@ var tree_node = canvas
     .enter()
     .append("g")
     .attr("id", function (d, i) {
-        console.log(d, i)
+        // console.log(d, i)
         return "node-" + (d.group);
     })
     .attr("class", "node")

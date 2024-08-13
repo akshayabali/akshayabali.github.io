@@ -707,8 +707,8 @@ graph_data = {
 
     var node_list = d3.selectAll(".node rect");
 
-    console.log("data", d3.selectAll(".node rect"))
-    console.log("Node list", node_list)
+    // console.log("data", d3.selectAll(".node rect"))
+    // console.log("Node list", node_list)
 
     d3.selectAll(".node rect")
     .attr("fill", function (d) {
