@@ -24,6 +24,47 @@ window.field_map = {
     "group" : [17]
 }
 
+// 0: "Topic"
+// 1: "Title"
+// 2: "DOI"
+// 3: "Institution"
+// 4: "Location"
+// 5: "Last Author"
+// 6: "Publication Venue"
+// 7: "Year"
+// 8: "Citations"
+// 9: "Type / Chassis (Bio)"
+// 10: "Functions"
+// 11: "Materials"
+// 12: "Process"
+// 13: "Modalities "
+// 14: "Scale"
+// 15: "Mechanism"
+// 16: "Application-Driven Constraints"
+// 17: "Group"
+
+window.field_value_map = {
+    "Topic" : "topic",
+    "Title" : "title",
+    "DOI" : "doi",
+    "Institution" : "institution",
+    "Location" : "location",
+    "Last Author" : "last_author",
+    "Publication Venue" : "venue",
+    "Year" : "year",
+    "Citations" : "citations",
+    "Type / Chassis (Bio)" : "bio",
+    "Functions" : "bio",
+    "Materials" : "bio",
+    "Process" : "bio",
+    "Modalities" : "bio",
+    "Scale" : "bio",
+    "Mechanism" : "bio",
+    "Application-Driven Constraints" : "constraints",
+    "Group" : "group"
+}
+
+window.current_field_map = field_value_map;
 
 function updateTable(rows) {
 
@@ -32,6 +73,16 @@ function updateTable(rows) {
         return d[0] != "";
     });
 
+    // Create current_field_map from rows[0] and field_map
+    window.current_field_map = {};
+    rows[0].forEach(function (d, i) {
+        var value = field_value_map[d];
+        if (value in current_field_map) {
+            current_field_map[value].push(i);
+        } else {
+            current_field_map[value] = [i];
+        }
+    });
 
     table_height = window.innerHeight - 25;
     table_width = window.screen.width;
@@ -94,13 +145,13 @@ function updateTable(rows) {
             d3.select(this).style("background-color", "powderblue");
         })
         .on("mouseout", function (event, d) {
-            current_id = d[field_map["doi"][0]].replaceAll("/", "-");
+            current_id = d[current_field_map["doi"][0]].replaceAll("/", "-");
             current_id = current_id.replaceAll(".", "-");
             current_id = current_id.toLowerCase();
             if (current_id != selected_doi) {
                 d3.select(this).style("background-color", function (d, i) {
-                    if (d[field_map["group"][0]]){
-                        return d3.color(colorscale(mapping[d[field_map["group"][0]]])).copy({opacity: 0.2});
+                    if (d[current_field_map["group"][0]]){
+                        return d3.color(colorscale(mapping[d[current_field_map["group"][0]]])).copy({opacity: 0.2});
                     } else {
                         return "white";
                     }               
@@ -109,9 +160,9 @@ function updateTable(rows) {
         })
         // Add color to the row
         .style("background-color", function (d, i) {
-            if (d[field_map["group"][0]]) {
+            if (d[current_field_map["group"][0]]) {
                 // Reduce opacity for the color
-                return d3.color(colorscale(mapping[d[field_map["group"][0]]])).copy({opacity: 0.2});
+                return d3.color(colorscale(mapping[d[current_field_map["group"][0]]])).copy({opacity: 0.2});
                 
             } else {
                 return "white";
@@ -176,26 +227,6 @@ d3.select("#download").on("click", function () {
     // window.open(URL.createObjectURL(file));
     saveBlob(blob, "data.csv");
 });
-
-// 0: "Topic"
-// 1: "Title"
-// 2: "DOI"
-// 3: "Institution"
-// 4: "Location"
-// 5: "Last Author"
-// 6: "Publication Venue"
-// 7: "Year"
-// 8: "Citations"
-// 9: "Type / Chassis (Bio)"
-// 10: "Functions"
-// 11: "Materials"
-// 12: "Process"
-// 13: "Modalities "
-// 14: "Scale"
-// 15: "Mechanism"
-// 16: "Application-Driven Constraints"
-// 17: "Group"
-
 
 
 d3.select('fieldset').on('change', function () {
