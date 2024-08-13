@@ -2204,7 +2204,8 @@ div
         headers = dataset[0];
         my_dataset = dataset.filter(function (d) {
             for (i = 0; i < filters.length; i++) {
-                if (!d[0].toLowerCase().includes(filters[i].toLowerCase())) {
+                // if (!d[0].toLowerCase().includes(filters[i].toLowerCase())) {
+                if (!d[field_map["topic"][0]].toLowerCase().includes(filters[i].toLowerCase())) {
                     return false;
                 }
             }
