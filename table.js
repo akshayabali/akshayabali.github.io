@@ -266,7 +266,7 @@ d3.select('fieldset').on('change', function () {
     console.log("Names: ", hidden_column_names);
 
     window.current_hidden_columns = default_hidden_columns.filter(function (d) {
-        return !hidden_column_names.includes(d);
+        return hidden_column_names.includes(d);
     });
 
     console.log("Hidden Columns: ", current_hidden_columns);
