@@ -206,17 +206,12 @@ function updateTable(rows) {
             d3.select(this).style("background-color", "powderblue");
         })
         .on("mouseout", function (event, d) {
-            current_id = d[current_field_map["doi"][0]].replaceAll("/", "-");
+            console.log("Mouse out");
+            current_id = this.attributes.DOI.value;
             current_id = current_id.replaceAll(".", "-");
             current_id = current_id.toLowerCase();
             if (current_id != selected_doi) {
-                d3.select(this).style("background-color", function (d, i) {
-                    if (d[current_field_map["group"][0]]){
-                        return d3.color(colorscale(mapping[d[current_field_map["group"][0]]])).copy({opacity: 0.2});
-                    } else {
-                        return "white";
-                    }               
-                });
+                d3.select(this).style("background-color", d3.select(this).attr("own-color"));
             }
         })
         // Add color to the row
@@ -225,6 +220,13 @@ function updateTable(rows) {
                 // Reduce opacity for the color
                 return d3.color(colorscale(mapping[d[current_field_map["group"][0]]])).copy({opacity: 0.2});
                 
+            } else {
+                return "white";
+            }               
+        })
+        .attr("own-color", function (d, i) {
+            if (d[current_field_map["group"][0]]) {
+                return d3.color(colorscale(mapping[d[current_field_map["group"][0]]])).copy({opacity: 0.2});
             } else {
                 return "white";
             }               
