@@ -24,25 +24,6 @@ window.field_map = {
     "group" : [17]
 }
 
-// 0: "Topic"
-// 1: "Title"
-// 2: "DOI"
-// 3: "Institution"
-// 4: "Location"
-// 5: "Last Author"
-// 6: "Publication Venue"
-// 7: "Year"
-// 8: "Citations"
-// 9: "Type / Chassis (Bio)"
-// 10: "Functions"
-// 11: "Materials"
-// 12: "Process"
-// 13: "Modalities "
-// 14: "Scale"
-// 15: "Mechanism"
-// 16: "Application-Driven Constraints"
-// 17: "Group"
-
 window.field_value_map = {
     "Topic" : "topic",
     "Title" : "title",
@@ -66,11 +47,38 @@ window.field_value_map = {
 
 window.current_field_map = field_value_map;
 
+window.default_hidden_columns = ["Institution", "Location", "Publication Venue", "Year", "Citations", "Type / Chassis (Bio)", "Functions", "Materials", "Process", "Modalities", "Scale", "Mechanism", "Application-Driven Constraints"];
+
+window.current_hidden_columns = default_hidden_columns;
+
+
 function updateTable(rows) {
 
     // Filter rows to remove null values
     rows = rows.filter(function (d) {
         return d[0] != "";
+    });
+
+    var hidden_columns = [];
+    // Create array of indices to hide
+    for (var col in current_hidden_columns) {
+        var value = field_map[field_value_map[current_hidden_columns[col]]];
+        if (!hidden_columns.includes(value)) {
+            hidden_columns.push(value);
+        }
+    }
+
+    console.log("Hidden Columns: ", hidden_columns);
+
+    // Flatten the array
+    hidden_columns = hidden_columns.flat();
+
+
+    // Hide columns that are in the hidden_columns
+    var rows = rows.map(function (d) {
+        return d.filter(function (d, i) {
+            return !hidden_columns.includes(i);
+        });
     });
 
     // Create current_field_map from rows[0] and field_map
@@ -237,24 +245,34 @@ d3.select('fieldset').on('change', function () {
         return d.value;
     });
 
-    // Get the field_map of all the checked values
-    var field_map_values = values.map(function (d) {
-        return field_map[d];
+    // using field_value_map and values to get the actual keys for columns to hide
+    var hidden_columns = [];
+    values.forEach(function (d) {
+        var value = field_map[field_value_map[d]];
+        if (!hidden_columns.includes(value)) {
+            hidden_columns.push(value);
+        }
     });
 
     // Flatten the array
-    field_map_values = field_map_values.flat();
+    hidden_columns = hidden_columns.flat();
 
-    // Hide columns that are in the field_map_values
-    var new_data_set = window.dataset.map(function (d) {
-        return d.filter(function (d, i) {
-            return !field_map_values.includes(i);
-        });
+    var hidden_column_names = [];
+
+    for (var name in window.dataset[0]) {
+        if (!hidden_columns.includes(name)) {
+            hidden_column_names.push(name);
+        }
+    }
+
+    window.current_hidden_columns = default_hidden_columns.filter(function (d) {
+        return !hidden_column_names.includes(d);
     });
 
+    console.log("Hidden Columns: ", current_hidden_columns);
+
     // Update the table with the new data
-    updateTable(new_data_set);
-    console.log(new_data_set);
+    updateTable(window.dataset);
 
 });
 
@@ -263,5 +281,5 @@ d3.select('fieldset').on('change', function () {
 new_data = d3.text("https://docs.google.com/spreadsheets/d/1OwYMYMnDuAxyrzR2CO1wwBVxKdZP5co6IanebfYfit0/export?format=csv").then(function (data) {
     window.dataset = d3.csvParseRows(data);
     // console.log(window.dataset); 
-    updateTable(dataset);
+    updateTable(window.dataset);
 });
