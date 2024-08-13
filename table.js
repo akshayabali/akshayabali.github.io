@@ -123,7 +123,7 @@ function updateTable(rows) {
 
         
         .style("font-family", "Helvetica Light")
-        .style("font-size", "large") 
+        .style("font-size", "medium") 
         // .style("font-size", "large") 
         // .style("font-family", "Helvetica")
         // Increase font weight more but less than bold
@@ -165,7 +165,8 @@ d3.select("#download").on("click", function () {
 
 
 d3.select('fieldset').on('change', function () {
-    var selectedValue = d3.select('fieldset input:checked');
+    // Get all checked checkboxes in the fieldset
+    var checked = d3.selectAll('fieldset input:checked');
     console.log(selectedValue);
 });
 
