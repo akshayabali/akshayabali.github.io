@@ -127,6 +127,7 @@ function updateTable(rows) {
         //   font: 'Helvetica Light', 'Helvetica', Arial, sans-serif
         .style("font-family", "Helvetica Light")
         .style("font-weight", "100")
+        .style("font-size", "medium")
         
         
 
@@ -194,7 +195,7 @@ function updateTable(rows) {
 
         
         .style("font-family", "Helvetica Light")
-        .style("font-size", "medium") 
+        .style("font-size", "small") 
         // .style("font-size", "large") 
         // .style("font-family", "Helvetica")
         // Increase font weight more but less than bold
