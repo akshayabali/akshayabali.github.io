@@ -165,7 +165,7 @@ d3.select("#download").on("click", function () {
 
 
 d3.select('fieldset').on('change', function () {
-    var selectedValue = d3.select('fieldset input:checked').node().value;
+    var selectedValue = d3.select('fieldset input:checked');
     console.log(selectedValue);
 });
 
