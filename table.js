@@ -167,7 +167,7 @@ d3.select("#download").on("click", function () {
 d3.select('fieldset').on('change', function () {
     // Get all checked checkboxes in the fieldset
     var checked = d3.selectAll('fieldset input:checked');
-    console.log(selectedValue);
+    console.log(checked);
 });
 
 
