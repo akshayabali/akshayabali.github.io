@@ -9,22 +9,57 @@ mapping = {
     "C+B" : 8,
 }
 
+
+// 0 : "#"
+// 1 : "Topic"
+// 2 : "Title"
+// 3 : "DOI"
+// 4 : "Institution"
+// 5 : "Location"
+// 6 : "Last Author"
+// 7 : "Publication Venue"
+// 8 : "Year"
+// 9 : "Link"
+// 10 : "Citations"
+// 11 : "Type / Chassis (Bio)"
+// 12 : "Functions (Bio)"
+// 13 : "Scale (Bio)"
+// 14 : "Mechanism (Bio)"
+// 15 : "Modalities (Bio)"
+// 16 : "Type / Chassis (Elec)"
+// 17 : "Functions (Elec)"
+// 18 : "Materials (Elec)"
+// 19 : "Process(Elec)"
+// 20 : "Modalities (Elec)"
+// 21 : "Scale (Elec)"
+// 22 : "Type / Chassis (uF)"
+// 23 : "Functions (uF)"
+// 24 : "Materials (uf)"
+// 25 : "Process(uF)"
+// 26 : "Scale (uf)"
+// 27 : "Group"
+
+
 window.field_map = {
-    "topic": [0],
-    "title": [1],
-    "doi": [2],
-    "institution": [3],
-    "location": [4],
-    "last_author": [5],
-    "venue": [6],
-    "year": [7],
-    "citations" : [8],
-    "bio" : [9, 10, 11, 12, 13, 14, 15],
-    "constraints" : [16],
-    "group" : [17]
+    "id": [0],
+    "topic": [1],
+    "title": [2],
+    "doi": [3],
+    "institution": [4],
+    "location": [5],
+    "last_author": [6],
+    "venue": [7],
+    "year": [8],
+    "link": [9],
+    "citations" : [10],
+    "bio" : [11, 12, 13, 14, 15],
+    "elec" : [16, 17, 18, 19, 20, 21],
+    "uf" : [22, 23, 24, 25, 26],
+    "group" : [27]
 }
 
 window.field_value_map = {
+    "#": "id",
     "Topic" : "topic",
     "Title" : "title",
     "DOI" : "doi",
@@ -33,21 +68,30 @@ window.field_value_map = {
     "Last Author" : "last_author",
     "Publication Venue" : "venue",
     "Year" : "year",
+    "Link" : "link",
     "Citations" : "citations",
     "Type / Chassis (Bio)" : "bio",
-    "Functions" : "bio",
-    "Materials" : "bio",
-    "Process" : "bio",
-    "Modalities" : "bio",
-    "Scale" : "bio",
-    "Mechanism" : "bio",
-    "Application-Driven Constraints" : "constraints",
+    "Functions (Bio)" : "bio",
+    "Scale (Bio)" : "bio",
+    "Mechanism (Bio)" : "bio",
+    "Modalities (Bio)" : "bio",
+    "Type / Chassis (Elec)" : "elec",
+    "Functions (Elec)" : "elec",
+    "Materials (Elec)" : "elec",
+    "Process(Elec)" : "elec",
+    "Modalities (Elec)" : "elec",
+    "Scale (Elec)" : "elec",
+    "Type / Chassis (uF)" : "uf",
+    "Functions (uF)" : "uf",
+    "Materials (uf)" : "uf",
+    "Process(uF)" : "uf",
+    "Scale (uf)" : "uf",
     "Group" : "group"
 }
 
 window.current_field_map = field_value_map;
 
-window.default_hidden_columns = ["Institution", "Location", "Publication Venue", "Year", "Citations", "Type / Chassis (Bio)", "Functions", "Materials", "Process", "Modalities", "Scale", "Mechanism", "Application-Driven Constraints"];
+window.default_hidden_columns = ["Institution", "Location", "Publication Venue", "Year", "Citations", "Type / Chassis (Bio)", "Functions (Bio)", "Scale (Bio)", "Mechanism (Bio)", "Modalities (Bio)", "Type / Chassis (Elec)", "Functions (Elec)", "Materials (Elec)", "Process(Elec)", "Modalities (Elec)", "Scale (Elec)", "Type / Chassis (uF)", "Functions (uF)", "Materials (uf)", "Process(uF)", "Scale (uf)", "Link"];
 
 window.current_hidden_columns = default_hidden_columns;
 
