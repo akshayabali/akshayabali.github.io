@@ -68,8 +68,6 @@ function updateTable(rows) {
         }
     }
 
-    console.log("Hidden Columns: ", hidden_columns);
-
     // Flatten the array
     hidden_columns = hidden_columns.flat();
 
