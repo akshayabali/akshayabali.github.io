@@ -2048,7 +2048,7 @@ var sets = [
         label: "Bio",
         size: 55,
         label_1: "Bio",
-        tooltip: "Bio: Synthetic biology",
+        tooltip: "Bio: Engineered biology",
     },
     {
         sets: [1],

@@ -91,7 +91,7 @@ window.field_value_map = {
 
 window.current_field_map = field_value_map;
 
-window.default_hidden_columns = ["Institution", "Location", "Publication Venue", "Year", "Citations", "Type / Chassis (Bio)", "Functions (Bio)", "Scale (Bio)", "Mechanism (Bio)", "Modalities (Bio)", "Type / Chassis (Elec)", "Functions (Elec)", "Materials (Elec)", "Process(Elec)", "Modalities (Elec)", "Scale (Elec)", "Type / Chassis (uF)", "Functions (uF)", "Materials (uf)", "Process(uF)", "Scale (uf)", "Link"];
+window.default_hidden_columns = ["Institution", "Location", "Publication Venue", "Year", "Citations", "Link", "Type / Chassis (Bio)", "Functions (Bio)", "Scale (Bio)", "Mechanism (Bio)", "Modalities (Bio)", "Type / Chassis (Elec)", "Functions (Elec)", "Materials (Elec)", "Process(Elec)", "Modalities (Elec)", "Scale (Elec)", "Type / Chassis (uF)", "Functions (uF)", "Materials (uf)", "Process(uF)", "Scale (uf)"];
 
 window.current_hidden_columns = default_hidden_columns;
 
@@ -185,12 +185,18 @@ function updateTable(rows) {
         .enter()
         .append("tr")
         .attr("id", function (d, i) {
-            var doi = rows[i+1][2];
+            var doi = rows[i+1][current_field_map["doi"][0]];
             // replace "/"" and "."" with - to avoid selecting by DOI
             doi = doi.replaceAll("/", "-");
             doi = doi.replaceAll(".", "-");
             doi = doi.toLowerCase();
             return "td-" + doi;
+        })
+        .attr("col", function (d, i) {
+            return field_value_map[dataset[0][i]];
+        })
+        .attr("DOI", function (d, i) {
+            return rows[i+1][current_field_map["doi"][0]];
         })
         .on("mouseover", function () {
             d3.select(this).style("background-color", "powderblue");
@@ -228,11 +234,12 @@ function updateTable(rows) {
         .style("border", "1px black solid")
         .style("padding", "5px")
         .html(function (d, i) {
-            if (i != 2) {
+            if (i != field_map["title"][0]) {
                 return d;
             } else {
+                var doi = this.parentNode.attributes.DOI.value;
                 return (
-                    "<a href='http://www.doi.org/" + d + "' target='_blank'>" + d + "</a>"
+                    "<a href='http://www.doi.org/" + doi + "' target='_blank'>" + d + "</a>"
                 );
             }
         })
