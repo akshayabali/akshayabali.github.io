@@ -48,9 +48,15 @@ function updateTable(rows) {
         })
         .style("border", "1px black solid")
         .style("padding", "5px")
-        .style("background-color", "lightgray")
-        .style("font-weight", "bold")
-        .style("text-transform", "uppercase");
+        .style("background-color", "black")
+        // .style("font-weight", "bold")
+        .style("color", "white")
+        // .style("text-transform", "uppercase")
+        //   font: 'Helvetica Light', 'Helvetica', Arial, sans-serif
+        .style("font-family", "Helvetica Light")
+        .style("font-weight", "100")
+        
+        
 
     // data
     table
@@ -79,7 +85,7 @@ function updateTable(rows) {
             if (current_id != selected_doi) {
                 d3.select(this).style("background-color", function (d, i) {
                     if (d[17]){
-                        return d3.color(colorscale(mapping[d[17]])).copy({opacity: 0.6});
+                        return d3.color(colorscale(mapping[d[17]])).copy({opacity: 0.4});
                     } else {
                         return "white";
                     }               
@@ -91,7 +97,7 @@ function updateTable(rows) {
             if (d[17]){
                 // return colorscale(mapping[d[17]]);
                 // Reduce opacity for the color
-                return d3.color(colorscale(mapping[d[17]])).copy({opacity: 0.6});
+                return d3.color(colorscale(mapping[d[17]])).copy({opacity: 0.2});
                 
             } else {
                 return "white";
@@ -115,7 +121,13 @@ function updateTable(rows) {
             }
         })
 
-        .style("font-size", font_size);
+        
+        .style("font-family", "Helvetica Light")
+        .style("font-size", "large") 
+        // .style("font-size", "large") 
+        // .style("font-family", "Helvetica")
+        // Increase font weight more but less than bold
+        // .style("font-weight", "lighter")
 }
 
 
@@ -149,6 +161,12 @@ d3.select("#download").on("click", function () {
     file = new File([blob], "data.csv", { type: "text/csv;charset=utf-8" });
     // window.open(URL.createObjectURL(file));
     saveBlob(blob, "data.csv");
+});
+
+
+d3.select('fieldset').on('change', function () {
+    var selectedValue = d3.select('fieldset input:checked').node().value;
+    console.log(selectedValue);
 });
 
 
