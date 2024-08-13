@@ -9,6 +9,21 @@ mapping = {
     "C+B" : 8,
 }
 
+window.field_map = {
+    "topic": [0],
+    "title": [1],
+    "doi": [2],
+    "institution": [3],
+    "location": [4],
+    "last_author": [5],
+    "venue": [6],
+    "year": [7],
+    "citations" : [8],
+    "bio" : [9, 10, 11, 12, 13, 14, 15],
+    "constraints" : [16],
+    "group" : [17]
+}
+
 
 function updateTable(rows) {
 
@@ -79,13 +94,13 @@ function updateTable(rows) {
             d3.select(this).style("background-color", "powderblue");
         })
         .on("mouseout", function (event, d) {
-            current_id = d[2].replaceAll("/", "-");
+            current_id = d[field_map["doi"][0]].replaceAll("/", "-");
             current_id = current_id.replaceAll(".", "-");
             current_id = current_id.toLowerCase();
             if (current_id != selected_doi) {
                 d3.select(this).style("background-color", function (d, i) {
-                    if (d[17]){
-                        return d3.color(colorscale(mapping[d[17]])).copy({opacity: 0.4});
+                    if (d[field_map["group"][0]]){
+                        return d3.color(colorscale(mapping[d[field_map["group"][0]]])).copy({opacity: 0.2});
                     } else {
                         return "white";
                     }               
@@ -94,10 +109,9 @@ function updateTable(rows) {
         })
         // Add color to the row
         .style("background-color", function (d, i) {
-            if (d[17]){
-                // return colorscale(mapping[d[17]]);
+            if (d[field_map["group"][0]]) {
                 // Reduce opacity for the color
-                return d3.color(colorscale(mapping[d[17]])).copy({opacity: 0.2});
+                return d3.color(colorscale(mapping[d[field_map["group"][0]]])).copy({opacity: 0.2});
                 
             } else {
                 return "white";
@@ -163,15 +177,25 @@ d3.select("#download").on("click", function () {
     saveBlob(blob, "data.csv");
 });
 
+// 0: "Topic"
+// 1: "Title"
+// 2: "DOI"
+// 3: "Institution"
+// 4: "Location"
+// 5: "Last Author"
+// 6: "Publication Venue"
+// 7: "Year"
+// 8: "Citations"
+// 9: "Type / Chassis (Bio)"
+// 10: "Functions"
+// 11: "Materials"
+// 12: "Process"
+// 13: "Modalities "
+// 14: "Scale"
+// 15: "Mechanism"
+// 16: "Application-Driven Constraints"
+// 17: "Group"
 
-var field_map = {
-    "institution": [3],
-    "location": [4],
-    "venue": [6],
-    "year": [7],
-    "citations" : [8],
-    "bio" : [9, 10, 11, 12, 13, 14, 15],
-}
 
 
 d3.select('fieldset').on('change', function () {
