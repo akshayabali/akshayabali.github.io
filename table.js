@@ -219,7 +219,9 @@ var saveBlob = (function () {
 }())
 
 // Add event listener to the download button
-d3.select("#download").on("click", function () {
+// select button of type button with aria-label="Download Data"
+// d3.select("#download").on("click", function () {
+d3.select("button[aria-label='Download Data']").on("click", function () {
     // Filter rows to remove null values
     var rows = window.dataset;
     rows = rows.filter(function (d) {
