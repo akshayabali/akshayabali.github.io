@@ -204,6 +204,8 @@ function updateTable(rows) {
         })
         .on("mouseover", function () {
             d3.select(this).style("background-color", "powderblue");
+            // border: 2px solid black;
+            d3.select(this).style("border", "2px solid black");
         })
         .on("mouseout", function (event, d) {
             console.log("Mouse out");
@@ -212,6 +214,7 @@ function updateTable(rows) {
             current_id = current_id.toLowerCase();
             if (current_id != selected_doi) {
                 d3.select(this).style("background-color", d3.select(this).attr("own-color"));
+                d3.select(this).style("border", "1px black solid");
             }
         })
         // Add color to the row
