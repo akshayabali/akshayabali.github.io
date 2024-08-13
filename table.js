@@ -149,7 +149,9 @@ function updateTable(rows) {
         .style("height", table_height + "px")
         .append("table")
         .style("border-collapse", "collapse")
-        .style("border", "2px black solid");
+        .style("border", "2px black solid")
+        .style("margin-left", "auto")
+        .style("margin-right", "auto");
 
     // headers
     table
