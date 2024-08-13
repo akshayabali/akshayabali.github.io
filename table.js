@@ -210,7 +210,7 @@ function updateTable(rows) {
             d3.select(this).style("border", "2px solid black");
         })
         .on("mouseout", function (event, d) {
-            console.log("Mouse out");
+            // console.log("Mouse out");
             current_id = this.attributes.DOI.value;
             current_id = current_id.replaceAll(".", "-");
             current_id = current_id.toLowerCase();

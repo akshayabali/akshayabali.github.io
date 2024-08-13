@@ -159,9 +159,14 @@ window.clear_selected = function () {
 
 window.select_dataset = function (id) {
     headers = dataset[0];
+    id = id.split(",");
+    console.log(id);
     my_dataset = dataset.filter(function (d) {
-        if (d[field_map["group"][0]].includes(id)) {
-            return true;
+        for (let i = 0; i < id.length; i++) {
+            var check_id = id[i].replace(" ", "");
+            if (d[field_map["group"][0]].includes(check_id)) {
+                return true;
+            }
         }
         return false;
     });

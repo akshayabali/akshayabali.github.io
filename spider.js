@@ -349,7 +349,7 @@ spiderSVG
                 }
             })
             .on("click", function (event, d) {
-                var id = d3.select(this).attr("cur_name").split(" ")[1];
+                var id = d3.select(this).attr("cur_name").split("Type ")[1];
                 if (selected_spider == this) {
                     clear_selected();
                     return;    
