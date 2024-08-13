@@ -174,7 +174,7 @@ function updateTable(rows) {
         .style("font-family", "Helvetica Light")
         .style("font-weight", "100")
         .style("font-size", "medium")
-        .style("position", "sticky")
+        .style("position", "sticky") 
         
         
 
