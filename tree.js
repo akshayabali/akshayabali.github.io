@@ -13,7 +13,7 @@ var my_color_scale = [
     "#ff7f00", // orange         // Type C+D
     "#fdbf6f", // mustard        // Type C+B
     "#cab2d6", // brown          // Type 
-    "#ffff99", // yellow         // Type
+    "#ffffff", // yellow         // Type
     "#33a02c", // green          // Type 
     "#b15928", // brown          // Type
     "#f781bf", // pink           // Type
@@ -32,52 +32,72 @@ window.create_citation = function (url) {
     return "[" + citation_count + "]";
 }
 
+// A	BioPOLOS
+// B	BioHELOS
+// C	BioHOLOS
+// D	BioHEMOS
+// E	BioMICS
+// F	(Sec)BioFICS
+// C+B	BioHOLOS+BioHELOS
+// C+D	BioHOLOS+BioHEMOS
 
 var tree_nodes = [
     {
-        "name": "Type A",
+        // "name": "Type A",
+        "name": "BioPOLOS",
         "image": "https://static.wixstatic.com/media/474df2_0a164f5b88424d198e0426bfaee903fb~mv2.png",
-        "id_name": "Type A",
+        // "id_name": "Type A",
+        "id_name": "BioPOLOS",
         "description": "BUPOLOs  are pure-engineered  biological systems designed for laboratory use and evaluated with precise benchtop instruments, such as plate readers for analyzing optical properties, without the need for microfluidics or electronic components. " + create_citation("https://www.nature.com/articles/nmeth.2926#citeas") + " discusses tools for constructing genetic circuits, assembly failure modes, and mitigation techniques, showcasing examples of pure-engineered biological systems.",
         "group": 1,
         "position": 0,
     },
     {
-        "name": "Type B",
+        // "name": "Type B",
+        "name": "BioHELOS",
         "image": "https://static.wixstatic.com/media/474df2_cda4128518af4ce0932ff563212e38b4~mv2.png",
-        "id_name": "Type B",
+        // "id_name": "Type B",
+        "id_name": "BioHELOS",
         "description": "BUHELOs are hybrid-engineered biological systems that utilize microfluidics and are evaluated with precise electrical benchtop instruments, such as potentiostats and LCR meters, to analyze cellular properties and electrochemical reactions. An example is a microfluidic device featuring integrated metal electrodes for the electrical interrogation and impedance spectroscopy of individual bacterial cells "+ create_citation("https://link.springer.com/article/10.1023/A:1011403112850")+" . This system utilizes an LCR meter to perform impedance measurements and detect cell viability.",
         "group": 2,
         "position": 1,
     },
     {
-        "name": "Type C",
+        // "name": "Type C",
+        "name": "BioHOLOS",
         "image": "https://static.wixstatic.com/media/474df2_efbfe6af874f4fb98e1a3bcbb69dd317~mv2.png",
-        "id_name": "Type C",
+        // "id_name": "Type C",
+        "id_name": "BioHOLOS",
         "description": "BUHOLOs are hybrid-engineered biological systems analyzed using optical techniques within microfluidic setups and evaluated with benchtop instruments, such as flow cytometers, fluorescence detectors, and photon counters. An example is a microfabricated fluorescence-activated cell sorter using a benchtop experimental setup, which includes an inverted optical microscope and a photomultiplier tube " + create_citation("https://www.nature.com/articles/nbt1199_1109#citeas") + ".",
         "group": 3,
         "position": 2,
     },
     {
-        "name": "Type E",
+        // "name": "Type E",
+        "name": "BioMICS",
         "image": "https://static.wixstatic.com/media/474df2_1eff044c43fd4533aa4e098121019397~mv2.png",
-        "id_name": "Type E",
+        // "id_name": "Type E",
+        "id_name": "BioMICS",
         "description": "BUHEMCs are hybrid-engineered biological systems with independently designed custom CMOS electronics and microfluidics, which are portable but not yet ready for stand-alone field deployment. An example is a modular droplet microfluidic device embedded with custom CMOS electronic sensors for rapid screening of engineered biological systems under deployment conditions, although it requires syringe pumps and is not sufficiently miniaturized for field deployment " + create_citation("https://ieeexplore.ieee.org/abstract/document/10454379") + ".",
         "group": 5,
         "position": 3,
     },
     {
-        "name": "Type F",
+        // "name": "Type F",
+        "name": "(Sec)BioFICS",
         "image": "https://static.wixstatic.com/media/474df2_1f1407025af44a77a86d47252a4b4b89~mv2.png",
-        "id_name": "Type F",
+        // "id_name": "Type F",
+        "id_name": "(Sec)BioFICS",
         "description": "BUSHEMCs or CSBS/CBS are stand-alone, fully integrated field-deployable systems that use custom-designed CMOS electronics embedded within microfluidic housings, integrating all necessary components to ensure reliable data generation, wireless communication, and optimal integration between electronic and biological elements without needing any external components. One example is a miniaturized ingestible capsule combining luminescent engineered bacterial sensors with ultra-low-power custom CMOS electronics for detecting gastrointestinal inflammation [Cite].  Another example is a low-cost point-of-care (POC) biomolecular diagnostics system that fully integrates cell manipulation, cytometry, separation, and pneumatic-free bulk fluid flow control within a microfluidic channel using custom CMOS electronics " + create_citation("https://www.nature.com/articles/s41586-023-06369-x") + ".",
         "group": 6,
         "position": 4,
     },
     {
-        "name": "Type D",
+        // "name": "Type D",
+        "name": "BioHEMOS",
         "image": "https://static.wixstatic.com/media/474df2_bd1db39b17fd46ad8b31b4b78c1530ee~mv2.png",
-        "id_name": "Type D",
+        // "id_name": "Type D",
+        "id_name": "BioHEMOS",
         "description": "BUHEMOs are hybrid-engineered biological systems equipped with portable commercial electronics for data generation, processing, and wireless communication, eliminating the need for highly precise benchtop equipment and thus facilitating deployment. An example is a low-cost electronic optical reader, using LED light sources and commercial electronic sensors connected to an Arduino, for quantifying the colorimetric response from freeze-dried, paper-based reactions of synthetic gene networks " + create_citation("https://www.cell.com/fulltext/S0092-8674(14)01291-4") + ".",
         "group": 4,
         "position": 5,
@@ -86,20 +106,23 @@ var tree_nodes = [
 
 decisions = [
     {
-        "name": "Stand-alone",
+        "name": "Integration",
         "id": "Customized",
-        "one": "Type F",
-        "two": "Type E",
+        // "one": "Type F",
+        // "two": "Type E",
+        "one": "(Sec)BioFICS",
+        "two": "BioMICS",
         "level": 1,
-        "left_text": "Yes",
-        "right_text": "No",
+        "left_text": "Fully integrated",
+        "right_text": "Multicomponent",
         "description": "Stand-alone systems are classified as such when they fully integrate custom-designed wireless electronics within miniaturized microfluidic enclosures, thus eliminating the need for external wiring during field deployment. Stand-alone systems require minimal physical interaction, may be single-use, and are likely deployed in remote, inaccessible areas",
     },
     {
         "name": "Process",
         "id": "Deployable",
         "one": "Customized",
-        "two": "Type D",
+        // "two": "Type D",
+        "two": "BioHEMOS",
         "level": 2,
         "left_text": "Custom IC",
         "right_text": "Commercial Electronics",
@@ -108,8 +131,10 @@ decisions = [
     {
         "name": "Measurement",
         "id": "Measurement",
-        "one": "Type C",
-        "two": "Type B",
+        // "one": "Type C",
+        // "two": "Type B",
+        "one": "BioHOLOS",
+        "two": "BioHELOS",
         "level": 1,
         "left_text": "Optical",
         "right_text": "Electrical",
@@ -119,7 +144,8 @@ decisions = [
         "name": "Fluid Control",
         "id": "Microfluidic",
         "one": "Measurement",
-        "two": "Type A",
+        // "two": "Type A",
+        "two": "BioPOLOS",
         "level": 2,
         "left_text": "Small volume of controlled fluids",
         "right_text": "No controlled fluids",
@@ -164,7 +190,7 @@ window.select_dataset = function (id) {
     my_dataset = dataset.filter(function (d) {
         for (let i = 0; i < id.length; i++) {
             var check_id = id[i].replace(" ", "");
-            if (d[field_map["group"][0]].includes(check_id)) {
+            if (d[field_map["bucket"][0]].includes(check_id)) {
                 return true;
             }
         }
@@ -177,7 +203,7 @@ window.select_dataset = function (id) {
 
 var tree_nodes_length = tree_nodes.length;
 
-rectWidth = 340;
+rectWidth = 400;
 rectHeight = 170;
 rectRadius = 10;
 
@@ -269,7 +295,7 @@ var tree_node = canvas
     })
     .on("mouseover ", function (event, d) {
 
-        var id = d.name.split(" ")[1];
+        var id = d.name.split(" ")[0];
         for (let i = 0; i < graph_labels.length; i++) {
             if (graph_labels[i].group == id) {
                 d3.select(this).select("rect").attr("fill", colorscale(graph_labels[i].id));
@@ -293,7 +319,7 @@ var tree_node = canvas
         tooltip.style("opacity", 0);
         tooltip.style("width", 128 + "px")
         // tooltip.transition().duration(400).style("opacity", 0);
-        var id = d.name.split(" ")[1];
+        var id = d.name.split(" ")[0];
         for (let i = 0; i < graph_labels.length; i++) {
             if (graph_labels[i].group == id) {
                 d3.select(this).select("rect").attr("fill", colorscale(graph_labels[i].id) + "b9");
@@ -302,7 +328,7 @@ var tree_node = canvas
 
     })
     .on("click", function (event, d) {
-        var id = d.name.split(" ")[1];
+        var id = d.name.split(" ")[0];
         if (selected_tree == this) {
             clear_selected();
             return;

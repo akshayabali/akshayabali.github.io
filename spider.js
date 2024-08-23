@@ -16,9 +16,20 @@ var feature_description = {
 // Deployability 1, 1, 1, 3, 4, 5
 // Reuse 5, 4, 4 3, 2, 1
 
+
+// A	BioPOLOS
+// B	BioHELOS
+// C	BioHOLOS
+// D	BioHEMOS
+// E	BioMICS
+// F	(Sec)BioFICS
+// C+B	BioHOLOS+BioHELOS
+// C+D	BioHOLOS+BioHEMOS
+
 var spider_data = [
     {
-        "name": "Type F",
+        // "name": "Type F",
+        "name": "(Sec)BioFICS",
         "label": "f",
         "group": 6,
         "data": {
@@ -30,7 +41,8 @@ var spider_data = [
         },
     },
     {
-        "name": "Type E",
+        // "name": "Type E",
+        "name": "BioMICS",
         "label": "e",
         "group": 5,
         "data": {
@@ -42,7 +54,8 @@ var spider_data = [
         },
     },
     {
-        "name": "Type D",
+        // "name": "Type D",
+        "name": "BioHEMOS",
         "label": "d",
         "group": 4,
         "data": {
@@ -54,7 +67,8 @@ var spider_data = [
         },
     },
     {
-        "name": "Type A",
+        // "name": "Type A",
+        "name": "BioPOLOS",
         "label": "a",
         "group": 1,
         "data": {
@@ -66,7 +80,8 @@ var spider_data = [
         },
     },
     {
-        "name": "Type B, C",
+        // "name": "Type B, C",
+        "name": "BioHELOS, BioHOLOS",
         "label": "b, c",
         "group": 2,
         "data": {
@@ -349,7 +364,7 @@ spiderSVG
                 }
             })
             .on("click", function (event, d) {
-                var id = d3.select(this).attr("cur_name").split("Type ")[1];
+                var id = d3.select(this).attr("cur_name").split("Type ")[0];
                 if (selected_spider == this) {
                     clear_selected();
                     return;    

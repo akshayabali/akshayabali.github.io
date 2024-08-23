@@ -1,13 +1,16 @@
 mapping = {
-    "A" : 1,
-    "B" : 2,
-    "C" : 3,
-    "D" : 4,
-    "E" : 5,
-    "F" : 6,
-    "C+D" : 7,
-    "C+B" : 8,
+    "BioPOLOS" : 1,
+    "BioHELOS" : 2,
+    "BioHOLOS" : 3,
+    "BioHEMOS" : 4,
+    "BioMICS" : 5,
+    "(Sec)BioFICS" : 6,
+    "BioHOLOS+BioHELOS" : 7,
+    "BioHOLOS+BioHEMOS" : 8,
+    "Uncharachterized" : 9,
 }
+
+
 
 
 // 0 : "#"
@@ -55,7 +58,8 @@ window.field_map = {
     "bio" : [11, 12, 13, 14, 15],
     "elec" : [16, 17, 18, 19, 20, 21],
     "uf" : [22, 23, 24, 25, 26],
-    "group" : [27]
+    "group" : [27],
+    "bucket" : [28]
 }
 
 window.field_value_map = {
@@ -86,12 +90,13 @@ window.field_value_map = {
     "Materials (uf)" : "uf",
     "Process(uF)" : "uf",
     "Scale (uf)" : "uf",
-    "Group" : "group"
+    "Group" : "group",
+    "Bucket" : "bucket"
 }
 
 window.current_field_map = field_value_map;
 
-window.default_hidden_columns = ["Institution", "DOI", "Location", "Publication Venue", "Year", "Citations", "Link", "Type / Chassis (Bio)", "Functions (Bio)", "Scale (Bio)", "Mechanism (Bio)", "Modalities (Bio)", "Type / Chassis (Elec)", "Functions (Elec)", "Materials (Elec)", "Process(Elec)", "Modalities (Elec)", "Scale (Elec)", "Type / Chassis (uF)", "Functions (uF)", "Materials (uf)", "Process(uF)", "Scale (uf)"];
+window.default_hidden_columns = ["Institution", "DOI", "Location", "Publication Venue", "Year", "Citations", "Link", "Type / Chassis (Bio)", "Functions (Bio)", "Scale (Bio)", "Mechanism (Bio)", "Modalities (Bio)", "Type / Chassis (Elec)", "Functions (Elec)", "Materials (Elec)", "Process(Elec)", "Modalities (Elec)", "Scale (Elec)", "Type / Chassis (uF)", "Functions (uF)", "Materials (uf)", "Process(uF)", "Scale (uf)", "Group"];
 
 window.current_hidden_columns = default_hidden_columns;
 
@@ -221,17 +226,17 @@ function updateTable(rows) {
         })
         // Add color to the row
         .style("background-color", function (d, i) {
-            if (d[current_field_map["group"][0]]) {
+            if (d[current_field_map["bucket"][0]]) {
                 // Reduce opacity for the color
-                return d3.color(colorscale(mapping[d[current_field_map["group"][0]]])).copy({opacity: 0.2});
+                return d3.color(colorscale(mapping[d[current_field_map["bucket"][0]]])).copy({opacity: 0.2});
                 
             } else {
                 return "white";
             }               
         })
         .attr("own-color", function (d, i) {
-            if (d[current_field_map["group"][0]]) {
-                return d3.color(colorscale(mapping[d[current_field_map["group"][0]]])).copy({opacity: 0.2});
+            if (d[current_field_map["bucket"][0]]) {
+                return d3.color(colorscale(mapping[d[current_field_map["bucket"][0]]])).copy({opacity: 0.2});
             } else {
                 return "white";
             }               
@@ -347,4 +352,5 @@ new_data = d3.text("https://docs.google.com/spreadsheets/d/1OwYMYMnDuAxyrzR2CO1w
     window.dataset = d3.csvParseRows(data);
     // console.log(window.dataset); 
     updateTable(window.dataset);
+    createVenn();
 });
