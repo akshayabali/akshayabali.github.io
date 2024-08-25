@@ -648,42 +648,44 @@ graph_data = {
     "labels": [
         {
             "A": 1,
-            "group": "A",
+            "group": "BioPOLOS",
             "id": 1
         },
         {
             "B": 2,
-            "group": "B",
+            "group": "BioHELOS",
             "id": 2
         },
         {
             "C": 3,
-            "group": "C",
+            "group": "BioHOLOS",
             "id": 3
         },
         {
             "D": 4,
-            "group": "D",
+            "group": "BioMICS",
             "id": 4
         },
         {
             "E": 5,
-            "group": "E",
+            "group": "BioHEMOS",
             "id": 5
         },
         {
             "F": 6,
-            "group": "F",
+            "group": "(Sec)BioFICS",
             "id": 6
         },
         {
             "C+D": 7,
-            "group": "C+D",
+            // "group": "C+D",
+            "group": "BioHOLOS + BioMICS",
             "id": 7,
         },
         {
             "C+B": 8,
-            "group": "C+B",
+            // "group": "C+B",
+            "group": "BioHOLOS + BioHELOS",
             "id": 8
         }
     ]
@@ -715,12 +717,12 @@ graph_data = {
         return colorscale(d.group) + "b9";
     })
 
-    var label_distance = circle_radius * 20;
-    var left_padding = 10;
+    var label_distance = circle_radius * 25;
+    var left_padding = 0    ;
 
     const label_box = d3.select("#graph_labels")
         .append("svg")
-        .attr("width", window.innerWidth * 0.6)
+        .attr("width", window.innerWidth * 0.9)
         .attr("height", window.innerHeight / 20)
         .attr("viewBox", [0, 0, 1300, 65])
         .attr("style", "max-width: 100%; height: auto; display:block; margin:auto;");
@@ -732,7 +734,7 @@ graph_data = {
 
     label.append("circle")
         .attr("r", circle_radius)
-        .attr("cx", d => left_padding + (d.id - 1) * label_distance)
+        .attr("cx", d => left_padding + (d.id - 2) * label_distance)
         .attr("cy", d => circle_radius)
         .attr("fill", d => colorscale(d.id))
         .text(d => d.group);
@@ -741,12 +743,12 @@ graph_data = {
     window.label_max = 0;
     label.append("text")
         .attr("x", d => {
-            var x = left_padding + (d.id - 1) * label_distance;
+            var x = left_padding + (d.id - 2) * label_distance;
             if (x > label_max) {
                 label_max = x;
             }
             // label_box.attr("width", label_max);
-            return left_padding + 10 + (d.id - 1) * label_distance
+            return left_padding + 10 + (d.id - 2) * label_distance
         })
         .attr("y", d => circle_radius)
         .attr("dy", ".35em")
