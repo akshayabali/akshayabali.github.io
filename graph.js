@@ -693,7 +693,7 @@ graph_data = {
 
     // Specify the dimensions of the chart.
 
-    var graphWidth = 750;
+    window.graphWidth = 750;
     var graphHeight = 600;
     // var width = window.screen.width;
     // var height = window.screen.height * 0.5;

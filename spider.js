@@ -1,6 +1,6 @@
-window.features = ["Integration Level", "Cost Effectiveness", "Precision", "Reuse", "Deployability",];
+var features = ["Integration Level", "Cost Effectiveness", "Precision", "Reuse", "Deployability",];
 
-window.feature_description = {
+var feature_description = {
     "Integration Level": "The level of integration changes as more functions are combined into a single device. Integration can improve the deployment abilities, reproducibility, size, and ease of use. The tradeoff is that devices must be produced at a volume to justify the NRE costs.",
     "Deployability": "Field deployability increases when systems are fully integrated, require minimal physical interaction after deployment, and utilize wireless communications.",
     "Reuse": "Reuse improves for in-lab systems used for development, whereas hybrid systems designed for deployment may be single-use.",
@@ -25,7 +25,7 @@ window.feature_description = {
 // C+B	BioHOLOS+BioHELOS
 // C+D	BioHOLOS+BioHEMOS
 
-window.spider_data = [
+var spider_data = [
     {
         // "name": "Type F",
         "name": "(Sec)BioFICS",
@@ -93,7 +93,7 @@ window.spider_data = [
     },
 ];
 
-window.spider_labels =  [
+var spider_labels =  [
         {
             "A": 1,
             "group": "BioPOLOS",
@@ -126,23 +126,23 @@ window.spider_labels =  [
         }
     ]
 
-window.canWidth = 500;
-window.canHeight = 700;
+var canWidth = 500;
+var canHeight = 700;
 
 window.spider_font_scaling = 1.5;
-window.circle_radius = font_size / 2;
+var circle_radius = font_size / 2;
 
-window.label_distance = circle_radius * 25;
-window.left_padding = 0    ;
+var label_distance = circle_radius * 25;
+var left_padding = 0    ;
 
-const spider_label_box = d3.select("#spider_labels")
+var spider_label_box = d3.select("#spider_labels")
         .append("svg")
         .attr("width", window.innerWidth * 0.9)
         .attr("height", window.innerHeight / 20)
         .attr("viewBox", [0, 0, 1300, 65])
         .attr("style", "max-width: 100%; height: auto; display:block; margin:auto;");
     
-    const spider_label = spider_label_box.append("g")
+var spider_label = spider_label_box.append("g")
         .selectAll()
         .data(spider_labels)
         .join("g")
