@@ -1,4 +1,3 @@
-let data = [];
 let features = ["Integration Level", "Cost Effectiveness", "Precision", "Reuse", "Deployability",];
 
 var feature_description = {

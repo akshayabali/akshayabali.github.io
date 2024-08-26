@@ -693,8 +693,8 @@ graph_data = {
 
     // Specify the dimensions of the chart.
 
-    const width = 750;
-    const height = 600;
+    const graphWidth = 750;
+    const graphHeight = 600;
     // const width = window.screen.width;
     // const height = window.screen.height * 0.5;
 
@@ -770,7 +770,7 @@ graph_data = {
         .force("link", d3.forceLink(links).id(d => d.id).distance(link_distance).strength(link_strength))
         .force("charge", d3.forceManyBody().strength(charge_strength).distanceMax(charge_distance))
         .force("collide", d3.forceCollide().radius(d => d.r + 1).iterations(3))
-        .force("center", d3.forceCenter(width / 2, height / 2).strength(1))
+        .force("center", d3.forceCenter(graphWidth / 2, graphHeight / 2).strength(1))
         .on("tick", ticked);
 
     // Create the SVG container.
@@ -778,7 +778,7 @@ graph_data = {
         d3.select("#graph").append("svg")
         .attr("width", window.innerWidth/3  )
         .attr("height", window.innerHeight * 0.4)
-        .attr("viewBox", [0, 0, width, height])
+        .attr("viewBox", [0, 0, graphWidth, graphHeight])
         .attr("style", "max-width: 100%;");
 
     // Add a line for each link, and a circle for each node.
@@ -885,13 +885,13 @@ graph_data = {
         set_y = event.y;
         if (set_x < 0) {
             set_x = 0;
-        } else if (set_x > width) {
-            set_x = width;
+        } else if (set_x > graphWidth) {
+            set_x = graphWidth;
         }
         if (set_y < 0) {
             set_y = 0;
-        } else if (set_y > height) {
-            set_y = height;
+        } else if (set_y > graphHeight) {
+            set_y = graphHeight;
         }
         event.subject.fx = set_x;
         event.subject.fy = set_y;
