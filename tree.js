@@ -220,6 +220,7 @@ window.tree_font_size = font_size * 1.5;
 window.tooltip = d3.select("body").append("div")
     .attr("class", "venntooltip")
     .attr("height", tree_font_size)
+    .style("font-size", "small") 
     // .attr("width", application_width)
     .on("mousemove", function(event, d) {
 
