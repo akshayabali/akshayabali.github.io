@@ -101,6 +101,43 @@ window.default_hidden_columns = ["Institution", "DOI", "Location", "Publication 
 window.current_hidden_columns = default_hidden_columns;
 
 
+// Up icon
+// <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8l256 0c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z"/></svg>
+
+// Down icon
+// <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8l-256 0c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"/></svg>
+
+function getUpIcon(id) {
+    return d3
+        .select("svg")
+        .attr("xmlns", "http://www.w3.org/2000/svg")
+        .attr("viewBox", "0 0 320 512")
+        .attr("id", id)
+        .append("path")
+        .attr("d", "M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8l256 0c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z");
+
+}
+
+function getDownIcon(id) {
+    return d3
+        .select("svg")
+        .attr("xmlns", "http://www.w3.org/2000/svg")
+        .attr("viewBox", "0 0 320 512")
+        .attr("id", id)
+        .append("path")
+        .attr("d", "M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8l-256 0c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z");
+}
+
+function getTspan(text) {
+    return d3
+        .select("tspan")
+        .text(text)
+        .attr("x", 0)
+        .attr("dy", "1.2em");
+}
+
+
+
 function updateTable(rows) {
 
     // Filter rows to remove null values
@@ -166,9 +203,106 @@ function updateTable(rows) {
         .data(rows[0])
         .enter()
         .append("th")
-        .text(function (d) {
-            return d;
+        // Add up and down icons using getUpIcon and getDownIcon and text using getTspan
+        .html(function (d, i) {
+            var up_string = '<i class="fa-solid fa-caret-up table-sort-icons" style="padding-left: 10px; display:none" id="up-' + d.toLowerCase() + '"></i>';
+            var down_string = '<i class="fa-solid fa-caret-down table-sort-icons" style="padding-left: 10px; display:none" id="down-' + d.toLowerCase() + '"></i>';
+            var current_sorted_direction = d3.select("#table").attr("sorted_direction") || "None";
+            var current_sorted_field = d3.select("#table").attr("sorted_field") || "None";
+            var shown_string = down_string;
+            if (current_sorted_direction == "asc" && current_sorted_field == d) {
+                shown_string = up_string;
+            }
+            return (
+                d +
+                shown_string
+            );
         })
+        .attr("col", function (d, i) {
+            return d
+        })
+        .on("mouseover", function (d) {
+            var current_sorted_field = d3.select("#table").attr("sorted_field") || "None";
+            var me = d3.select(this);
+            me.select("i").style("display", "inline");
+        })
+        .on("mouseout", function (d) {
+            var current_sorted_field = d3.select("#table").attr("sorted_field") || "None";
+            var me = d3.select(this);
+
+            if (current_sorted_field != d3.select(this).attr("col")) {
+                me.select("i").style("display", "none");
+            }
+        })
+        .on("click", function (d) {
+            var me = d3.select(this)
+            var field = me.attr("col");
+            var rows = window.dataset;
+            var headers = rows[0];
+            var rows = rows.slice(1);
+            var sorted = me.attr("sorted");
+            // Get the current sorted field, get None if doesn't exist
+            var current_sorted_field = d3.select("#table").attr("sorted_field") || "None";
+            var current_sorted_direction = d3.select("#table").attr("sorted_direction") || "None";
+            
+            // Find the index of the field in the rows[0]
+            var index = headers.indexOf(field);
+            field = index;
+            if (current_sorted_direction == "None" || current_sorted_direction == "desc") {
+                rows = rows.sort(function (a, b) {
+                    // Try parsing the strings to numbers, if number then sort by number else sort by string
+                    var a_val = a[field];
+                    var b_val = b[field];
+                    if (!isNaN(a_val) && !isNaN(b_val)) {
+                        return a_val - b_val;
+                    } else {
+                        if (a_val < b_val) {
+                            return -1;
+                        }
+                        if (a_val > b_val) {
+                            return 1;
+                        }
+                        return 0;
+                    }
+                    
+                });
+                d3.select("#table").attr("sorted_direction", "asc");
+                me.select("i").style("display", "inline");
+                me.select("i").attr("class", "fa-solid fa-caret-down table-sort-icons");
+            } else if (current_sorted_direction == "asc") {
+                rows = rows.sort(function (a, b) {
+                    // Try parsing the strings to numbers, if number then sort by number else sort by string
+                    var a_val = a[field];
+                    var b_val = b[field];
+                    if (!isNaN(a_val) && !isNaN(b_val)) {
+                        return b_val - a_val;
+                    } else {
+                        if (a_val > b_val) {
+                            return -1;
+                        }
+                        if (a_val < b_val) {
+                            return 1;
+                        }
+                        return 0;
+                    }
+                });
+                d3.select("#table").attr("sorted_direction", "desc");
+                me.select("i").style("display", "inline");
+                me.select("i").attr("class", "fa-solid fa-caret-up table-sort-icons");
+            }
+            
+            // Add the headers back to the rows
+            d3.select("#table").attr("sorted_field", headers[field]);
+            rows = [headers].concat(rows);
+            updateTable(rows);
+
+        })
+        .attr("id", function (d) {
+            return d.toLowerCase();
+        })
+        // .text(function (d) {
+        //     return d;
+        // })
         .style("border", "1px black solid")
         .style("padding", "5px")
         .style("background-color", "black")
