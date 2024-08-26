@@ -94,10 +94,80 @@ var spider_data = [
     },
 ];
 
+var spider_labels =  [
+        {
+            "A": 1,
+            "group": "BioPOLOS",
+            "id": 1,
+            "color": 1
+        },
+        {
+            "B": 2,
+            "group": "BioHELOS, BioHOLOS",
+            "id": 2,
+            "color": 2
+        },
+        {
+            "D": 4,
+            "group": "BioMICS",
+            "id": 3,
+            "color": 4
+        },
+        {
+            "E": 5,
+            "group": "BioHEMOS",
+            "id": 4,
+            "color": 5
+        },
+        {
+            "F": 6,
+            "group": "(Sec)BioFICS",
+            "id": 5,
+            "color": 6
+        }
+    ]
+
 var canWidth = 500;
 var canHeight = 700;
 
 window.spider_font_scaling = 1.5;
+
+const spider_label_box = d3.select("#spider_labels")
+        .append("svg")
+        .attr("width", window.innerWidth * 0.9)
+        .attr("height", window.innerHeight / 20)
+        .attr("viewBox", [0, 0, 1300, 65])
+        .attr("style", "max-width: 100%; height: auto; display:block; margin:auto;");
+    
+    const spider_label = spider_label_box.append("g")
+        .selectAll()
+        .data(spider_labels)
+        .join("g")
+
+        spider_label.append("circle")
+        .attr("r", circle_radius)
+        .attr("cx", d => left_padding + (d.id - 0.5) * label_distance)
+        .attr("cy", d => circle_radius)
+        .attr("fill", d => colorscale(d.color))
+        .text(d => d.group);
+
+
+    window.label_max = 0;
+    spider_label.append("text")
+        .attr("x", d => {
+            var x = left_padding + (d.id - 0.5) * label_distance;
+            if (x > label_max) {
+                label_max = x;
+            }
+            // spider_label_box.attr("width", label_max);
+            return left_padding + 10 + (d.id - 0.5) * label_distance
+        })
+        .attr("y", d => circle_radius)
+        .attr("dy", ".35em")
+        .attr("text-anchor", "left")
+        .attr("font-size", font_size)
+        .text(d => ": " + d.group);
+
 
 var spiderSVG = d3.select("#spider").append("svg")
     .attr("width", window.innerWidth / 3)
@@ -322,10 +392,12 @@ spiderSVG
                 switch (spider_data[i].group) {
                     case 6:
                         return d3.color(window.colorscale(spider_data[i].group)).darker(0.9);
+                    case 5:
+                        return d3.color(window.colorscale(spider_data[i].group)).darker(0.2);
                     case 4:
-                        return d3.color(window.colorscale(spider_data[i].group)).brighter(0.6);
+                        return d3.color(window.colorscale(spider_data[i].group)).darker(0.9);
                     case 1:
-                        return d3.color(window.colorscale(spider_data[i].group)).brighter(0);
+                        return d3.color(window.colorscale(spider_data[i].group)).darker(0.9);
                     case 2:
                         return d3.color(window.colorscale(spider_data[i].group)).brighter(0);
                     default:
