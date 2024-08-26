@@ -1,6 +1,6 @@
-var features = ["Integration Level", "Cost Effectiveness", "Precision", "Reuse", "Deployability",];
+window.features = ["Integration Level", "Cost Effectiveness", "Precision", "Reuse", "Deployability",];
 
-var feature_description = {
+window.feature_description = {
     "Integration Level": "The level of integration changes as more functions are combined into a single device. Integration can improve the deployment abilities, reproducibility, size, and ease of use. The tradeoff is that devices must be produced at a volume to justify the NRE costs.",
     "Deployability": "Field deployability increases when systems are fully integrated, require minimal physical interaction after deployment, and utilize wireless communications.",
     "Reuse": "Reuse improves for in-lab systems used for development, whereas hybrid systems designed for deployment may be single-use.",
@@ -25,7 +25,7 @@ var feature_description = {
 // C+B	BioHOLOS+BioHELOS
 // C+D	BioHOLOS+BioHEMOS
 
-var spider_data = [
+window.spider_data = [
     {
         // "name": "Type F",
         "name": "(Sec)BioFICS",
@@ -93,7 +93,7 @@ var spider_data = [
     },
 ];
 
-var spider_labels =  [
+window.spider_labels =  [
         {
             "A": 1,
             "group": "BioPOLOS",
@@ -126,14 +126,14 @@ var spider_labels =  [
         }
     ]
 
-var canWidth = 500;
-var canHeight = 700;
+window.canWidth = 500;
+window.canHeight = 700;
 
 window.spider_font_scaling = 1.5;
-var circle_radius = font_size / 2;
+window.circle_radius = font_size / 2;
 
-var label_distance = circle_radius * 25;
-var left_padding = 0    ;
+window.label_distance = circle_radius * 25;
+window.left_padding = 0    ;
 
 const spider_label_box = d3.select("#spider_labels")
         .append("svg")
