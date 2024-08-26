@@ -163,7 +163,6 @@ const spider_label_box = d3.select("#spider_labels")
             if (x > label_max) {
                 label_max = x;
             }
-            // spider_label_box.attr("width", label_max);
             return left_padding + 10 + (d.id - 0.5) * label_distance
         })
         .attr("y", d => circle_radius)
