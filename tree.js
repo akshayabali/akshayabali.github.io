@@ -51,6 +51,7 @@ var tree_nodes = [
         "description": "BioPOLOS  are pure-engineered  biological systems designed for laboratory use and evaluated with precise benchtop instruments, such as plate readers for analyzing optical properties, without the need for microfluidics or electronic components. [37] discusses tools for constructing genetic circuits, assembly failure modes, and mitigation techniques, showcasing examples of pure-engineered biological systems.",
         "group": 1,
         "position": 0,
+        "color": 1,
     },
     {
         // "name": "Type B",
@@ -61,6 +62,7 @@ var tree_nodes = [
         "description": "BioHELOS are hybrid-engineered biological systems that utilize microfluidics and are evaluated with precise electrical benchtop instruments, such as potentiostats and LCR meters, to analyze cellular properties and electrochemical reactions. An example is a microfluidic device featuring integrated metal electrodes for the electrical interrogation and impedance spectroscopy of individual bacterial cells [25]. This system utilizes an LCR meter to perform impedance measurements and detect cell viability.",
         "group": 2,
         "position": 1,
+        "color": 2,
     },
     {
         // "name": "Type C",
@@ -71,6 +73,7 @@ var tree_nodes = [
         "description": "BioHOLOS are hybrid-engineered biological systems analyzed using optical techniques within microfluidic setups and evaluated with benchtop instruments, such as flow cytometers, fluorescence detectors, and photon counters. An example is a microfabricated fluorescence-activated cell sorter using a benchtop experimental setup, which includes an inverted optical microscope and a photomultiplier tube [1].",
         "group": 3,
         "position": 2,
+        "color": 3,
     },
     {
         // "name": "Type E",
@@ -81,6 +84,7 @@ var tree_nodes = [
         "description": "BioMICS are hybrid-engineered biological systems with independently designed custom CMOS electronics and microfluidics, which are portable but not yet ready for stand-alone field deployment. An example is a modular droplet microfluidic device embedded with custom CMOS electronic sensors for rapid screening of engineered biological systems under deployment conditions, although it requires syringe pumps and is not sufficiently miniaturized for field deployment [150].",
         "group": 5,
         "position": 3,
+        "color": 4,
     },
     {
         // "name": "Type F",
@@ -91,6 +95,7 @@ var tree_nodes = [
         "description": "(Sec)BioFICS are stand-alone, fully integrated field-deployable systems that use custom-designed CMOS electronics embedded within microfluidic housings, integrating all necessary components to ensure reliable data generation, wireless communication, and optimal integration between electronic and biological elements without needing any external components. One example is a miniaturized ingestible capsule combining luminescent engineered bacterial sensors with ultra-low-power custom CMOS electronics for detecting gastrointestinal inflammation [89].  Another example is a low-cost point-of-care (POC) biomolecular diagnostics system that fully integrates cell manipulation, cytometry, separation, and pneumatic-free bulk fluid flow control within a microfluidic channel using custom CMOS electronics [115].",
         "group": 6,
         "position": 4,
+        "color": 6,
     },
     {
         // "name": "Type D",
@@ -101,6 +106,7 @@ var tree_nodes = [
         "description": "BioHEMOS are hybrid-engineered biological systems equipped with portable commercial electronics for data generation, processing, and wireless communication, eliminating the need for highly precise benchtop equipment and thus facilitating deployment. An example is a low-cost electronic optical reader, using LED light sources and commercial electronic sensors connected to an Arduino, for quantifying the colorimetric response from freeze-dried, paper-based reactions of synthetic gene networks [72].",
         "group": 4,
         "position": 5,
+        "color": 5,
     },
 ];
 
@@ -346,7 +352,13 @@ tree_node
     .append("rect")
     .attr("width", rectWidth)
     .attr("height", rectHeight)
-    .attr("fill", "rgba(255, 255, 255, 0)")
+    // .attr("fill", "rgba(255, 255, 255, 0)")
+    .attr("fill", function (d) {
+        console.log(d.group);
+        console.log(tree_nodes[d.group - 1].position);
+        console.log(tree_nodes[d.group - 1].name);
+        return colorscale(tree_nodes[d.group - 1].color);
+    })
     .attr("stroke", "black")
     .attr("rx", rectRadius)
     .attr("stroke-width", 1.5);

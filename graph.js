@@ -712,10 +712,10 @@ graph_data = {
     // console.log("data", d3.selectAll(".node rect"))
     // console.log("Node list", node_list)
 
-    d3.selectAll(".node rect")
-    .attr("fill", function (d) {
-        return colorscale(d.group) + "b9";
-    })
+    // d3.selectAll(".node rect")
+    // .attr("fill", function (d) {
+    //     return colorscale(d.group) + "b9";
+    // })
 
     var label_distance = circle_radius * 25;
     var left_padding = 0    ;
