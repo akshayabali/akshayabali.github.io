@@ -693,15 +693,15 @@ graph_data = {
 
     // Specify the dimensions of the chart.
 
-    const graphWidth = 750;
-    const graphHeight = 600;
-    // const width = window.screen.width;
-    // const height = window.screen.height * 0.5;
+    var graphWidth = 750;
+    var graphHeight = 600;
+    // var width = window.screen.width;
+    // var height = window.screen.height * 0.5;
 
     // The force simulation mutates links and nodes, so create a copy
     // so that re-evaluating this cell produces the same result.
-    const links = graph_data.links.map(d => ({...d}));
-    const graph_nodes = graph_data.nodes.map(d => ({...d}));
+    var links = graph_data.links.map(d => ({...d}));
+    var graph_nodes = graph_data.nodes.map(d => ({...d}));
     window.graph_labels = graph_data.labels.map(d => ({...d}));
 
     var label_height = font_size * 2;
@@ -720,14 +720,14 @@ graph_data = {
     var label_distance = circle_radius * 25;
     var left_padding = 0    ;
 
-    const label_box = d3.select("#graph_labels")
+    var label_box = d3.select("#graph_labels")
         .append("svg")
         .attr("width", window.innerWidth * 0.9)
         .attr("height", window.innerHeight / 20)
         .attr("viewBox", [0, 0, 1300, 65])
         .attr("style", "max-width: 100%; height: auto; display:block; margin:auto;");
     
-    const label = label_box.append("g")
+    var label = label_box.append("g")
         .selectAll()
         .data(graph_labels)
         .join("g")
@@ -762,7 +762,7 @@ graph_data = {
     var charge_distance = font_size * 15;
 
     // Create a simulation with several forces.
-    const simulation = d3.forceSimulation(graph_nodes)
+    var simulation = d3.forceSimulation(graph_nodes)
         .alphaTarget(0.3) // stay hot
         .velocityDecay(0.1) // low friction
         .force("x", d3.forceX().strength(0.01))
@@ -774,7 +774,7 @@ graph_data = {
         .on("tick", ticked);
 
     // Create the SVG container.
-    const svg = 
+    var svg = 
         d3.select("#graph").append("svg")
         .attr("width", window.innerWidth/3  )
         .attr("height", window.innerHeight * 0.4)
@@ -782,7 +782,7 @@ graph_data = {
         .attr("style", "max-width: 100%;");
 
     // Add a line for each link, and a circle for each node.
-    const link = svg.append("g")
+    var link = svg.append("g")
         .attr("stroke", "#999")
         .attr("stroke-opacity", 0.6)
         .selectAll()
@@ -790,7 +790,7 @@ graph_data = {
         .join("line")
         .attr("stroke-width", d => Math.sqrt(d.value));
 
-    const node = svg.append("g")
+    var node = svg.append("g")
         .selectAll()
         .data(graph_nodes)
         .join("circle")

@@ -1,4 +1,4 @@
-let features = ["Integration Level", "Cost Effectiveness", "Precision", "Reuse", "Deployability",];
+var features = ["Integration Level", "Cost Effectiveness", "Precision", "Reuse", "Deployability",];
 
 var feature_description = {
     "Integration Level": "The level of integration changes as more functions are combined into a single device. Integration can improve the deployment abilities, reproducibility, size, and ease of use. The tradeoff is that devices must be produced at a volume to justify the NRE costs.",
@@ -177,11 +177,11 @@ var spiderSVG = d3.select("#spider").append("svg")
     .attr("viewBox", [0, 0, canWidth, canHeight])
 
 
-let radialScale = d3.scaleLinear()
+var radialScale = d3.scaleLinear()
     .domain([0, 5])
     .range([0, 250]);
 
-let ticks = [1, 2, 3, 4, 5];
+var ticks = [1, 2, 3, 4, 5];
 
 function angleToCoordinate(angle, value) {
     angle = angle - Math.PI / 4;
@@ -272,7 +272,7 @@ var label_rects = spiderSVG
     .append("g")
     .attr("class", "label-rectangles")
 
-let featureData = features.map((f, i) => {
+var featureData = features.map((f, i) => {
     let angle = (Math.PI / 2) + (2 * Math.PI * i / features.length);
     var label_coords = angleToCoordinate(angle, 5.6);
     var label_x1 = label_coords.x;
@@ -352,7 +352,7 @@ spiderSVG
 
     );
 
-let line = d3.line()
+var line = d3.line()
     .x(d => d.x)
     .y(d => d.y);
 
