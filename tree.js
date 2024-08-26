@@ -357,7 +357,7 @@ tree_node
         console.log(d.group);
         console.log(tree_nodes[d.group - 1].position);
         console.log(tree_nodes[d.group - 1].name);
-        return colorscale(tree_nodes[d.group - 1].color);
+        return colorscale(tree_nodes[d.group - 1].color) + "b9";
     })
     .attr("stroke", "black")
     .attr("rx", rectRadius)
