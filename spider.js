@@ -131,6 +131,10 @@ var canWidth = 500;
 var canHeight = 700;
 
 window.spider_font_scaling = 1.5;
+var circle_radius = font_size / 2;
+
+var label_distance = circle_radius * 25;
+var left_padding = 0    ;
 
 const spider_label_box = d3.select("#spider_labels")
         .append("svg")
