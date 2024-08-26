@@ -190,7 +190,7 @@ window.select_dataset = function (id) {
     my_dataset = dataset.filter(function (d) {
         for (let i = 0; i < id.length; i++) {
             var check_id = id[i].replace(" ", "");
-            if (d[field_map["bucket"][0]].includes(check_id)) {
+            if (d[field_map["class"][0]].includes(check_id)) {
                 return true;
             }
         }

@@ -59,7 +59,7 @@ window.field_map = {
     "elec" : [16, 17, 18, 19, 20, 21],
     "uf" : [22, 23, 24, 25, 26],
     "group" : [27],
-    "bucket" : [28]
+    "class" : [28]
 }
 
 window.field_value_map = {
@@ -91,7 +91,7 @@ window.field_value_map = {
     "Process(uF)" : "uf",
     "Scale (uf)" : "uf",
     "Group" : "group",
-    "Bucket" : "bucket"
+    "Class" : "class"
 }
 
 window.current_field_map = field_value_map;
@@ -360,17 +360,17 @@ function updateTable(rows) {
         })
         // Add color to the row
         .style("background-color", function (d, i) {
-            if (d[current_field_map["bucket"][0]]) {
+            if (d[current_field_map["class"][0]]) {
                 // Reduce opacity for the color
-                return d3.color(colorscale(mapping[d[current_field_map["bucket"][0]]])).copy({opacity: 0.2});
+                return d3.color(colorscale(mapping[d[current_field_map["class"][0]]])).copy({opacity: 0.2});
                 
             } else {
                 return "white";
             }               
         })
         .attr("own-color", function (d, i) {
-            if (d[current_field_map["bucket"][0]]) {
-                return d3.color(colorscale(mapping[d[current_field_map["bucket"][0]]])).copy({opacity: 0.2});
+            if (d[current_field_map["class"][0]]) {
+                return d3.color(colorscale(mapping[d[current_field_map["class"][0]]])).copy({opacity: 0.2});
             } else {
                 return "white";
             }               
