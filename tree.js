@@ -203,7 +203,7 @@ window.select_dataset = function (id) {
 
 var tree_nodes_length = tree_nodes.length;
 
-rectWidth = 400;
+rectWidth = 420;
 rectHeight = 170;
 rectRadius = 10;
 
@@ -356,7 +356,7 @@ tree_node
     .attr("y", rectHeight / 2)
     .attr("text-anchor", "middle")
     .attr("dominant-baseline", "central")
-    .attr("x", 4 * rectWidth / 5)
+    .attr("x", 4 * rectWidth / 5.5)
     .attr("font-size", tree_font_size)
     .text(function (d) {
         return d.name;
