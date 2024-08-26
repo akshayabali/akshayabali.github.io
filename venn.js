@@ -2202,7 +2202,8 @@ div
         filter = d["label_1"];
         filters = filter.split(", ");
         headers = dataset[0];
-        my_dataset = dataset.filter(function (d) {
+        row = dataset.slice(1, dataset.length);
+        my_dataset = row.filter(function (d) {
             for (i = 0; i < filters.length; i++) {
                 // if (!d[0].toLowerCase().includes(filters[i].toLowerCase())) {
                 if (!d[field_map["topic"][0]].toLowerCase().includes(filters[i].toLowerCase())) {
