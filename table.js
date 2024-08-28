@@ -341,7 +341,9 @@ function updateTable(rows) {
         })
         .attr("DOI", function (d, i) {
             // return rows[i+1][current_field_map["doi"][0]];
-            return dataset[i+1][field_map["doi"][0]];
+            // console.log("DOI: ", rows[i+1][field_map["doi"][0]]);
+            var paper_id = rows[i+1][field_map["id"][0]];
+            return dataset[paper_id][field_map["doi"][0]];
         })
         .on("mouseover", function () {
             d3.select(this).style("background-color", "powderblue");
@@ -387,7 +389,7 @@ function updateTable(rows) {
             if (i != field_map["title"][0]) {
                 return d;
             } else {
-                var doi = this.parentNode.attributes.DOI.value;
+                var doi = d3.select(this.parentNode).attr("DOI");
                 return (
                     "<a href='http://www.doi.org/" + doi + "' target='_blank'>" + d + "</a>"
                 );
@@ -493,5 +495,5 @@ new_data = d3.text("https://docs.google.com/spreadsheets/d/1OwYMYMnDuAxyrzR2CO1w
     window.dataset = d3.csvParseRows(data);
     // console.log(window.dataset); 
     updateTable(window.dataset);
-    createVenn();
+    // createVenn();
 });
