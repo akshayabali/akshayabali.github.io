@@ -1,6 +1,6 @@
 //JS to load all the scripts
 
-var scripts = ["./tree.js", "./graph.js", "./venn.js", "spider.js", "./table.js"];
+var scripts = ["./tree.js", "./graph.js", "./venn.js", "spider.js", "./table.js", "./scatter.js"]
 
 
 // var script_url = {
