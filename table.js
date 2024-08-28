@@ -191,7 +191,7 @@ function updateTable(rows) {
         .style("height", table_height + "px")
         .append("table")
         .style("border-collapse", "collapse")
-        .style("border", "2px black solid")
+        .style("border", "0px black solid")
         .style("margin-left", "auto")
         .style("margin-right", "auto");
 
@@ -303,7 +303,7 @@ function updateTable(rows) {
         // .text(function (d) {
         //     return d;
         // })
-        .style("border", "1px black solid")
+        .style("border", "0px black solid")
         .style("padding", "5px")
         .style("background-color", "black")
         // .style("font-weight", "bold")
