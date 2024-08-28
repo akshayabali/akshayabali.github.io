@@ -428,6 +428,13 @@ d3.select("button[aria-label='Download Data']").on("click", function () {
     rows = rows.filter(function (d) {
         return d[0] != "";
     });
+    // Remove the "group" column
+    var group_index = field_map["group"][0];
+    rows = rows.map(function (d) {
+        return d.filter(function (d, i) {
+            return i != group_index;
+        });
+    });
     console.log(rows)
     var csv = d3.csvFormat(rows);
     // Remove first line from the csv
