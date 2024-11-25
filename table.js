@@ -140,6 +140,8 @@ function getTspan(text) {
 
 function updateTable(rows) {
 
+    window.current_dataset = rows;
+
     // Filter rows to remove null values
     rows = rows.filter(function (d) {
         return d[0] != "";
@@ -237,7 +239,7 @@ function updateTable(rows) {
         .on("click", function (d) {
             var me = d3.select(this)
             var field = me.attr("col");
-            var rows = window.dataset;
+            var rows = window.current_dataset;
             var headers = rows[0];
             var rows = rows.slice(1);
             var sorted = me.attr("sorted");
