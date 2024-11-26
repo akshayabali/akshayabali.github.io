@@ -85,11 +85,13 @@ svg.append("g")
     .call(text => text.append("tspan")
         .attr("y", "-0.4em")
         .attr("font-weight", "bold")
+        .attr("font-size", font_size)
         .text(d => d.data.name))
     .call(text => text.filter(d => (d.endAngle - d.startAngle) > 0.25).append("tspan")
         .attr("x", 0)
         .attr("y", "0.7em")
         .attr("fill-opacity", 0.7)
+        .attr("font-size", font_size)
         .text(d => d.data.value.toLocaleString("en-US")));
 
 
@@ -97,31 +99,33 @@ var legendRectSize = 13;
 var legendSpacing = 7;
 
 var legend = svg.selectAll('.legend') //the legend and placement
-.data(total_title)
-.enter()
-.append('g')
-.attr('class', 'circle-legend')
-.attr('transform', function (d, i) {
-    var height = legendRectSize + legendSpacing;
-    var offset = height * total_title.length / 2;
-    var horz = -2 * legendRectSize - 16;
-    var vert = i * height - offset;
-    return 'translate(' + horz + ',' + vert + ')';
-});
+    .data(total_title)
+    .enter()
+    .append('g')
+    .attr('class', 'circle-legend')
+    .attr('transform', function (d, i) {
+        var height = legendRectSize + legendSpacing;
+        var offset = height * total_title.length / 2;
+        var horz = -2 * legendRectSize - 16;
+        var vert = i * height - offset;
+        return 'translate(' + horz + ',' + vert + ')';
+    });
 
 legend.append('circle') //keys
-.style('fill', function (d) {
-    return colorscale(mapping[d]);
-})
-.style('stroke', function (d) {
-    return colorscale(mapping[d]);
-})
-.attr('cx', 0)
-.attr('cy', 0)
-.attr('r', '.5rem');
+    .style('fill', function (d) {
+        return colorscale(mapping[d]);
+    })
+    .style('stroke', function (d) {
+        return colorscale(mapping[d]);
+    })
+    .attr('cx', 0)
+    .attr('cy', 0)
+    .attr('r', '.5rem');
+
 legend.append('text') //labels
-.attr('x', legendRectSize + legendSpacing)
-.attr('y', legendRectSize - legendSpacing)
-.text(function (d) {
-    return d;
-});
+    .attr('x', legendRectSize + legendSpacing)
+    .attr('y', legendRectSize - legendSpacing)
+    .attr("font-size", font_size)
+    .text(function (d) {
+        return d;
+    });
