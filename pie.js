@@ -85,13 +85,13 @@ svg.append("g")
     .call(text => text.append("tspan")
         .attr("y", "-0.4em")
         .attr("font-weight", "bold")
-        .attr("font-size", font_size)
+        .attr("font-size", font_size * 0.85)
         .text(d => d.data.name))
     .call(text => text.filter(d => (d.endAngle - d.startAngle) > 0.25).append("tspan")
         .attr("x", 0)
         .attr("y", "0.7em")
         .attr("fill-opacity", 0.7)
-        .attr("font-size", font_size)
+        .attr("font-size", font_size * 0.85)
         .text(d => d.data.value.toLocaleString("en-US")));
 
 
@@ -125,7 +125,7 @@ legend.append('circle') //keys
 legend.append('text') //labels
     .attr('x', legendRectSize + legendSpacing)
     .attr('y', legendRectSize - legendSpacing)
-    .attr("font-size", font_size)
+    .attr("font-size", font_size * 0.85)
     .text(function (d) {
         return d;
     });
