@@ -25,10 +25,13 @@ var totals = [
     }
 ]
 
+var total_sum = 0;
+
 var total_title = [];
 
 for (var i = 0; i < totals.length; i++) {
     total_title.push(totals[i].title);
+    total_sum += totals[i].value;
 }
 
 
@@ -66,6 +69,28 @@ var path = svg.selectAll('path')
         return r_color_rgb;
      })
      .attr('transform', 'translate(0, 0)')
+
+svg.append("g")
+    // .attr("font-family", "sans-serif")
+    // .attr("font-size", 12)
+    .attr("text-anchor", "middle")
+    .selectAll()
+    .data(pie(totals).map(d => {
+        var new_d = Object.assign({}, d);
+        new_d.data.value = (d.data.value / total_sum * 100).toFixed(2) + "%";
+        return new_d;
+    }))
+    .join("text")
+    .attr("transform", d => `translate(${arc.centroid(d)})`)
+    .call(text => text.append("tspan")
+        .attr("y", "-0.4em")
+        .attr("font-weight", "bold")
+        .text(d => d.data.name))
+    .call(text => text.filter(d => (d.endAngle - d.startAngle) > 0.25).append("tspan")
+        .attr("x", 0)
+        .attr("y", "0.7em")
+        .attr("fill-opacity", 0.7)
+        .text(d => d.data.value.toLocaleString("en-US")));
 
 
 var legendRectSize = 13;
