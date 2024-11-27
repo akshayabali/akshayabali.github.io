@@ -487,7 +487,7 @@ d3.select('fieldset').on('change', function () {
     console.log("Hidden Columns: ", current_hidden_columns);
 
     // Update the table with the new data
-    updateTable(window.dataset);
+    updateTable(window.current_dataset);
 
 });
 
