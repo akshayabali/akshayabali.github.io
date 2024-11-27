@@ -25,13 +25,12 @@ var totals = [
     }
 ]
 
-var total_sum = 0;
+var total_sum = 117;
 
 var total_title = [];
 
 for (var i = 0; i < totals.length; i++) {
     total_title.push(totals[i].title);
-    total_sum += totals[i].value;
 }
 
 
