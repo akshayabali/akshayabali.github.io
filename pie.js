@@ -25,7 +25,7 @@ var totals = [
     },
 ]
 
-var total_sum = 117;
+var total_sum = 122;
 
 var total_title = [];
 
