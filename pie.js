@@ -1,28 +1,28 @@
 var totals = [
     {
-        title: "BioPOLOS",
-        value: 11,
+        title: "(Sec)BioFICS",
+        value: 47,
     },
     {
         title: "BioHELOS",
+        value: 10,
+    },
+    {
+        title: "BioHEMOS",
         value: 9,
     },
     {
         title: "BioHOLOS",
-        value: 29,
-    },
-    {
-        title: "BioHEMOS",
-        value: 11,
+        value: 32,
     },
     {
         title: "BioMICS",
-        value: 16,
+        value: 15,
     },
     {
-        title: "(Sec)BioFICS",
-        value: 45,
-    }
+        title: "BioPOLOS",
+        value: 12,
+    },
 ]
 
 var total_sum = 117;
