@@ -426,8 +426,12 @@ spiderSVG
                 tooltip.style("width", "100px");
             })
             .on("mousemove", function (event, d) {
-                tooltip.style("left", (event.pageX) + "px")
-                    .style("top", (event.pageY - 28) + "px");
+                var tooltip_width = tooltip.node().getBoundingClientRect().width;
+
+                var tooltip_x = event.pageX + 310 > window.innerWidth ? event.pageX - tooltip_width - 10 : event.pageX + 10;
+
+                tooltip.style("left", (tooltip_x) + "px")
+                    .style("top", (event.pageY) + "px");
             })
             .on("mouseout", function (event, d) {
                 tooltip.style("opacity", 0);
