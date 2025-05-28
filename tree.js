@@ -279,7 +279,6 @@ var canvas = d3
     .attr("height", window.innerHeight * 0.65)
     // .attr("viewBox", "0 0 " + window.innerWidth * 0.92 + " " + window.innerHeight * 0.7)
     .attr("viewBox", "0 0 " + viewBox_width + " " + viewBox_height)
-    .append("g")
     
 
 var tree_nodes_sorted = tree_nodes.sort(function (a, b) {
@@ -332,7 +331,17 @@ var tree_node = canvas
                 d3.select(this).select("rect").attr("fill", colorscale(graph_labels[i].id) + "b9");
             }
         }
-
+    })
+    .on("pointerout", function (event, d) {
+        tooltip.style("opacity", 0);
+        tooltip.style("width", 128 + "px")
+        // tooltip.transition().duration(400).style("opacity", 0);
+        var id = d.name.split(" ")[0];
+        for (let i = 0; i < graph_labels.length; i++) {
+            if (graph_labels[i].group == id) {
+                d3.select(this).select("rect").attr("fill", colorscale(graph_labels[i].id) + "b9");
+            }
+        }
     })
     .on("click", function (event, d) {
         var id = d.name.split(" ")[0];
